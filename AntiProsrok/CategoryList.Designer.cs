@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbCategoryList = new System.Windows.Forms.ListBox();
-            this.butCancel = new System.Windows.Forms.Button();
-            this.butOk = new System.Windows.Forms.Button();
-            this.butCategoryEdit = new System.Windows.Forms.Button();
-            this.butCategoryAdd = new System.Windows.Forms.Button();
-            this.tbCategoryName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbCategoryName = new System.Windows.Forms.TextBox();
+            this.butCategoryAdd = new System.Windows.Forms.Button();
+            this.butCategoryRemove = new System.Windows.Forms.Button();
+            this.butOk = new System.Windows.Forms.Button();
+            this.butCancel = new System.Windows.Forms.Button();
+            this.lbCategoryList = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +44,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.tbCategoryName);
             this.groupBox1.Controls.Add(this.butCategoryAdd);
-            this.groupBox1.Controls.Add(this.butCategoryEdit);
+            this.groupBox1.Controls.Add(this.butCategoryRemove);
             this.groupBox1.Controls.Add(this.butOk);
             this.groupBox1.Controls.Add(this.butCancel);
             this.groupBox1.Controls.Add(this.lbCategoryList);
@@ -56,14 +56,52 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Список категорий";
             // 
-            // lbCategoryList
+            // label1
             // 
-            this.lbCategoryList.FormattingEnabled = true;
-            this.lbCategoryList.ItemHeight = 15;
-            this.lbCategoryList.Location = new System.Drawing.Point(6, 88);
-            this.lbCategoryList.Name = "lbCategoryList";
-            this.lbCategoryList.Size = new System.Drawing.Size(235, 139);
-            this.lbCategoryList.TabIndex = 0;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Название:";
+            // 
+            // tbCategoryName
+            // 
+            this.tbCategoryName.Location = new System.Drawing.Point(6, 32);
+            this.tbCategoryName.Name = "tbCategoryName";
+            this.tbCategoryName.Size = new System.Drawing.Size(235, 21);
+            this.tbCategoryName.TabIndex = 5;
+            // 
+            // butCategoryAdd
+            // 
+            this.butCategoryAdd.Location = new System.Drawing.Point(6, 59);
+            this.butCategoryAdd.Name = "butCategoryAdd";
+            this.butCategoryAdd.Size = new System.Drawing.Size(112, 23);
+            this.butCategoryAdd.TabIndex = 4;
+            this.butCategoryAdd.Text = "Добавить";
+            this.butCategoryAdd.UseVisualStyleBackColor = true;
+            this.butCategoryAdd.Click += new System.EventHandler(this.butCategoryAdd_Click);
+            // 
+            // butCategoryRemove
+            // 
+            this.butCategoryRemove.Location = new System.Drawing.Point(129, 59);
+            this.butCategoryRemove.Name = "butCategoryRemove";
+            this.butCategoryRemove.Size = new System.Drawing.Size(112, 23);
+            this.butCategoryRemove.TabIndex = 3;
+            this.butCategoryRemove.Text = "Удалить";
+            this.butCategoryRemove.UseVisualStyleBackColor = true;
+            this.butCategoryRemove.Click += new System.EventHandler(this.butCategoryRemove_Click);
+            // 
+            // butOk
+            // 
+            this.butOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.butOk.Location = new System.Drawing.Point(6, 233);
+            this.butOk.Name = "butOk";
+            this.butOk.Size = new System.Drawing.Size(235, 23);
+            this.butOk.TabIndex = 2;
+            this.butOk.Text = "Сохранить категории";
+            this.butOk.UseVisualStyleBackColor = true;
+            this.butOk.Click += new System.EventHandler(this.butOk_Click);
             // 
             // butCancel
             // 
@@ -75,49 +113,14 @@
             this.butCancel.Text = "Отмена";
             this.butCancel.UseVisualStyleBackColor = true;
             // 
-            // butOk
+            // lbCategoryList
             // 
-            this.butOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.butOk.Location = new System.Drawing.Point(6, 233);
-            this.butOk.Name = "butOk";
-            this.butOk.Size = new System.Drawing.Size(235, 23);
-            this.butOk.TabIndex = 2;
-            this.butOk.Text = "Сохранить категории";
-            this.butOk.UseVisualStyleBackColor = true;
-            // 
-            // butCategoryEdit
-            // 
-            this.butCategoryEdit.Location = new System.Drawing.Point(129, 59);
-            this.butCategoryEdit.Name = "butCategoryEdit";
-            this.butCategoryEdit.Size = new System.Drawing.Size(112, 23);
-            this.butCategoryEdit.TabIndex = 3;
-            this.butCategoryEdit.Text = "Изменить";
-            this.butCategoryEdit.UseVisualStyleBackColor = true;
-            // 
-            // butCategoryAdd
-            // 
-            this.butCategoryAdd.Location = new System.Drawing.Point(6, 59);
-            this.butCategoryAdd.Name = "butCategoryAdd";
-            this.butCategoryAdd.Size = new System.Drawing.Size(112, 23);
-            this.butCategoryAdd.TabIndex = 4;
-            this.butCategoryAdd.Text = "Добавить";
-            this.butCategoryAdd.UseVisualStyleBackColor = true;
-            // 
-            // tbCategoryName
-            // 
-            this.tbCategoryName.Location = new System.Drawing.Point(6, 32);
-            this.tbCategoryName.Name = "tbCategoryName";
-            this.tbCategoryName.Size = new System.Drawing.Size(235, 21);
-            this.tbCategoryName.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Название:";
+            this.lbCategoryList.FormattingEnabled = true;
+            this.lbCategoryList.ItemHeight = 15;
+            this.lbCategoryList.Location = new System.Drawing.Point(6, 88);
+            this.lbCategoryList.Name = "lbCategoryList";
+            this.lbCategoryList.Size = new System.Drawing.Size(235, 139);
+            this.lbCategoryList.TabIndex = 0;
             // 
             // CategoryList
             // 
@@ -148,7 +151,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbCategoryName;
         private System.Windows.Forms.Button butCategoryAdd;
-        private System.Windows.Forms.Button butCategoryEdit;
+        private System.Windows.Forms.Button butCategoryRemove;
         private System.Windows.Forms.Button butOk;
         private System.Windows.Forms.Button butCancel;
     }

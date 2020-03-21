@@ -15,6 +15,7 @@ namespace AntiProsrok
         public MainForm()
         {
             InitializeComponent();
+            cbFilterCategory.Items.AddRange(Category.GetCategories().ToArray());
         }
 
         #region Главное меню (MenuStrip)
@@ -58,7 +59,11 @@ namespace AntiProsrok
         private void mmManageCategory_Click(object sender, EventArgs e)
         {
             CategoryList catList = new CategoryList();
-            catList.ShowDialog();
+            if(catList.ShowDialog() == DialogResult.OK)
+            {
+                cbFilterCategory.Items.Clear();
+                cbFilterCategory.Items.AddRange(Category.GetCategories().ToArray());
+            }
         }
 
         // Управление - Добавить предмет
