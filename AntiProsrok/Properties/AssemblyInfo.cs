@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
-[assembly: AssemblyTitle("AntiProsrok")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("АнтиПросрочка")]
+[assembly: AssemblyDescription("Программа учета для всего, что имеет срок годности. Данные хранятся в XML-файлы. Есть возможность экспорта даных в CSV-файл.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AntiProsrok")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCompany("Shatunoff")]
+[assembly: AssemblyProduct("АнтиПросрочка")]
+[assembly: AssemblyCopyright("Copyright Shatunoff ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

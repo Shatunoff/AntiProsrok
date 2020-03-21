@@ -21,6 +21,8 @@ namespace AntiProsrok
             items = new Items();
             tslDateTime.Text = DateTime.Now.ToString();
             timerTime.Start();
+            cbFilterCategory.Items.Clear();
+            cbFilterCategory.Items.Add("");
             cbFilterCategory.Items.AddRange(Category.GetCategories().ToArray());
         }
 
@@ -44,7 +46,7 @@ namespace AntiProsrok
         private int GetIndexFromActiveDgv()
         {
             // TODO: Получить индекс из столбца ID выделенной строки активной таблицы
-            return 0;
+            return -1;
         }
 
         /// <summary>
@@ -121,6 +123,7 @@ namespace AntiProsrok
             if(catList.ShowDialog() == DialogResult.OK)
             {
                 cbFilterCategory.Items.Clear();
+                cbFilterCategory.Items.Add("");
                 cbFilterCategory.Items.AddRange(Category.GetCategories().ToArray());
             }
         }

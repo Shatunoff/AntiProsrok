@@ -119,7 +119,7 @@
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.mainMenu.Size = new System.Drawing.Size(784, 25);
+            this.mainMenu.Size = new System.Drawing.Size(838, 25);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -318,7 +318,7 @@
             this.statusBar.Location = new System.Drawing.Point(0, 399);
             this.statusBar.Name = "statusBar";
             this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusBar.Size = new System.Drawing.Size(784, 22);
+            this.statusBar.Size = new System.Drawing.Size(838, 22);
             this.statusBar.TabIndex = 1;
             this.statusBar.Text = "statusStrip1";
             // 
@@ -348,7 +348,7 @@
             this.tsbutToTrash});
             this.tsMain.Location = new System.Drawing.Point(0, 25);
             this.tsMain.Name = "tsMain";
-            this.tsMain.Size = new System.Drawing.Size(551, 31);
+            this.tsMain.Size = new System.Drawing.Size(605, 31);
             this.tsMain.TabIndex = 2;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -428,7 +428,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(0, 56);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(551, 343);
+            this.tabControlMain.Size = new System.Drawing.Size(605, 343);
             this.tabControlMain.TabIndex = 3;
             // 
             // tpAll
@@ -437,7 +437,7 @@
             this.tpAll.Location = new System.Drawing.Point(4, 24);
             this.tpAll.Name = "tpAll";
             this.tpAll.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAll.Size = new System.Drawing.Size(543, 315);
+            this.tpAll.Size = new System.Drawing.Size(597, 315);
             this.tpAll.TabIndex = 0;
             this.tpAll.Text = "Все предметы";
             this.tpAll.UseVisualStyleBackColor = true;
@@ -446,12 +446,20 @@
             // 
             this.dgvAll.AllowUserToAddRows = false;
             this.dgvAll.AllowUserToDeleteRows = false;
+            this.dgvAll.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvAll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAll.Location = new System.Drawing.Point(3, 3);
+            this.dgvAll.MultiSelect = false;
             this.dgvAll.Name = "dgvAll";
             this.dgvAll.ReadOnly = true;
-            this.dgvAll.Size = new System.Drawing.Size(537, 309);
+            this.dgvAll.RowHeadersVisible = false;
+            this.dgvAll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAll.ShowCellErrors = false;
+            this.dgvAll.ShowCellToolTips = false;
+            this.dgvAll.ShowEditingIcon = false;
+            this.dgvAll.ShowRowErrors = false;
+            this.dgvAll.Size = new System.Drawing.Size(591, 309);
             this.dgvAll.TabIndex = 0;
             // 
             // tpSoon
@@ -469,6 +477,7 @@
             // 
             this.dgvSoon.AllowUserToAddRows = false;
             this.dgvSoon.AllowUserToDeleteRows = false;
+            this.dgvSoon.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvSoon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSoon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSoon.Location = new System.Drawing.Point(3, 3);
@@ -484,7 +493,7 @@
             this.tpOverdue.Location = new System.Drawing.Point(4, 24);
             this.tpOverdue.Name = "tpOverdue";
             this.tpOverdue.Padding = new System.Windows.Forms.Padding(3);
-            this.tpOverdue.Size = new System.Drawing.Size(583, 333);
+            this.tpOverdue.Size = new System.Drawing.Size(543, 315);
             this.tpOverdue.TabIndex = 4;
             this.tpOverdue.Text = "Просрочка";
             this.tpOverdue.UseVisualStyleBackColor = true;
@@ -493,12 +502,13 @@
             // 
             this.dgvOverdue.AllowUserToAddRows = false;
             this.dgvOverdue.AllowUserToDeleteRows = false;
+            this.dgvOverdue.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvOverdue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOverdue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOverdue.Location = new System.Drawing.Point(3, 3);
             this.dgvOverdue.Name = "dgvOverdue";
             this.dgvOverdue.ReadOnly = true;
-            this.dgvOverdue.Size = new System.Drawing.Size(577, 327);
+            this.dgvOverdue.Size = new System.Drawing.Size(537, 309);
             this.dgvOverdue.TabIndex = 0;
             // 
             // panelForGb
@@ -506,7 +516,7 @@
             this.panelForGb.Controls.Add(this.gbFilter);
             this.panelForGb.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelForGb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panelForGb.Location = new System.Drawing.Point(551, 25);
+            this.panelForGb.Location = new System.Drawing.Point(605, 25);
             this.panelForGb.Name = "panelForGb";
             this.panelForGb.Padding = new System.Windows.Forms.Padding(6, 0, 6, 6);
             this.panelForGb.Size = new System.Drawing.Size(233, 374);
@@ -670,6 +680,8 @@
             // 
             this.cbFilterCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFilterCategory.FormattingEnabled = true;
+            this.cbFilterCategory.Items.AddRange(new object[] {
+            ""});
             this.cbFilterCategory.Location = new System.Drawing.Point(6, 77);
             this.cbFilterCategory.Name = "cbFilterCategory";
             this.cbFilterCategory.Size = new System.Drawing.Size(209, 23);
@@ -702,7 +714,7 @@
             // 
             // tpIsOkay
             // 
-            this.tpIsOkay.BackColor = System.Drawing.Color.Transparent;
+            this.tpIsOkay.BackColor = System.Drawing.SystemColors.Window;
             this.tpIsOkay.Controls.Add(this.dataGridView1);
             this.tpIsOkay.Location = new System.Drawing.Point(4, 24);
             this.tpIsOkay.Name = "tpIsOkay";
@@ -715,6 +727,7 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
@@ -732,7 +745,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 421);
+            this.ClientSize = new System.Drawing.Size(838, 421);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.tsMain);
             this.Controls.Add(this.panelForGb);
