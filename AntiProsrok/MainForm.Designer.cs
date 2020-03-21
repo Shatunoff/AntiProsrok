@@ -121,7 +121,7 @@
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.mainMenu.Size = new System.Drawing.Size(824, 25);
+            this.mainMenu.Size = new System.Drawing.Size(784, 25);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -317,10 +317,10 @@
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslToday,
             this.tslDateTime});
-            this.statusBar.Location = new System.Drawing.Point(0, 417);
+            this.statusBar.Location = new System.Drawing.Point(0, 399);
             this.statusBar.Name = "statusBar";
             this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusBar.Size = new System.Drawing.Size(824, 22);
+            this.statusBar.Size = new System.Drawing.Size(784, 22);
             this.statusBar.TabIndex = 1;
             this.statusBar.Text = "statusStrip1";
             // 
@@ -354,7 +354,7 @@
             this.tslQuickSearch});
             this.tsMain.Location = new System.Drawing.Point(0, 25);
             this.tsMain.Name = "tsMain";
-            this.tsMain.Size = new System.Drawing.Size(591, 31);
+            this.tsMain.Size = new System.Drawing.Size(551, 31);
             this.tsMain.TabIndex = 2;
             this.tsMain.Text = "toolStrip1";
             // 
@@ -465,7 +465,7 @@
             this.tabControlMain.Location = new System.Drawing.Point(0, 56);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(591, 361);
+            this.tabControlMain.Size = new System.Drawing.Size(551, 343);
             this.tabControlMain.TabIndex = 3;
             // 
             // tpAll
@@ -474,7 +474,7 @@
             this.tpAll.Location = new System.Drawing.Point(4, 24);
             this.tpAll.Name = "tpAll";
             this.tpAll.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAll.Size = new System.Drawing.Size(583, 333);
+            this.tpAll.Size = new System.Drawing.Size(543, 315);
             this.tpAll.TabIndex = 0;
             this.tpAll.Text = "Все предметы";
             this.tpAll.UseVisualStyleBackColor = true;
@@ -488,7 +488,7 @@
             this.dgvAll.Location = new System.Drawing.Point(3, 3);
             this.dgvAll.Name = "dgvAll";
             this.dgvAll.ReadOnly = true;
-            this.dgvAll.Size = new System.Drawing.Size(577, 327);
+            this.dgvAll.Size = new System.Drawing.Size(537, 309);
             this.dgvAll.TabIndex = 0;
             // 
             // tpSoon
@@ -543,10 +543,10 @@
             this.panelForGb.Controls.Add(this.gbFilter);
             this.panelForGb.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelForGb.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panelForGb.Location = new System.Drawing.Point(591, 25);
+            this.panelForGb.Location = new System.Drawing.Point(551, 25);
             this.panelForGb.Name = "panelForGb";
             this.panelForGb.Padding = new System.Windows.Forms.Padding(6, 0, 6, 6);
-            this.panelForGb.Size = new System.Drawing.Size(233, 392);
+            this.panelForGb.Size = new System.Drawing.Size(233, 374);
             this.panelForGb.TabIndex = 4;
             // 
             // gbFilter
@@ -572,7 +572,7 @@
             this.gbFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbFilter.Location = new System.Drawing.Point(6, 0);
             this.gbFilter.Name = "gbFilter";
-            this.gbFilter.Size = new System.Drawing.Size(221, 386);
+            this.gbFilter.Size = new System.Drawing.Size(221, 368);
             this.gbFilter.TabIndex = 0;
             this.gbFilter.TabStop = false;
             this.gbFilter.Text = "Фильтр";
@@ -762,7 +762,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 439);
+            this.ClientSize = new System.Drawing.Size(784, 421);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.tsMain);
             this.Controls.Add(this.panelForGb);

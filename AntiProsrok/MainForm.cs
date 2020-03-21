@@ -63,7 +63,8 @@ namespace AntiProsrok
         // Управление - Добавить предмет
         private void mmManageAdd_Click(object sender, EventArgs e)
         {
-
+            AddItem addItem = new AddItem();
+            addItem.ShowDialog();
         }
 
         // Управление - Изменить информацию о предмете
