@@ -65,6 +65,8 @@
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tpAll = new System.Windows.Forms.TabPage();
             this.dgvAll = new System.Windows.Forms.DataGridView();
+            this.tpIsOkay = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tpSoon = new System.Windows.Forms.TabPage();
             this.dgvSoon = new System.Windows.Forms.DataGridView();
             this.tpOverdue = new System.Windows.Forms.TabPage();
@@ -89,23 +91,23 @@
             this.lbFIlterCategory = new System.Windows.Forms.Label();
             this.tbFilterName = new System.Windows.Forms.TextBox();
             this.lbFIlterName = new System.Windows.Forms.Label();
-            this.tpIsOkay = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
+            this.statusSave = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pushTimer = new System.Windows.Forms.Timer(this.components);
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tpAll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAll)).BeginInit();
+            this.tpIsOkay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tpSoon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoon)).BeginInit();
             this.tpOverdue.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverdue)).BeginInit();
             this.panelForGb.SuspendLayout();
             this.gbFilter.SuspendLayout();
-            this.tpIsOkay.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -242,21 +244,21 @@
             this.mmManageCategory.Image = ((System.Drawing.Image)(resources.GetObject("mmManageCategory.Image")));
             this.mmManageCategory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mmManageCategory.Name = "mmManageCategory";
-            this.mmManageCategory.Size = new System.Drawing.Size(220, 38);
+            this.mmManageCategory.Size = new System.Drawing.Size(204, 38);
             this.mmManageCategory.Text = "Категории";
             this.mmManageCategory.Click += new System.EventHandler(this.mmManageCategory_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(217, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(201, 6);
             // 
             // mmManageAdd
             // 
             this.mmManageAdd.Image = ((System.Drawing.Image)(resources.GetObject("mmManageAdd.Image")));
             this.mmManageAdd.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mmManageAdd.Name = "mmManageAdd";
-            this.mmManageAdd.Size = new System.Drawing.Size(220, 38);
+            this.mmManageAdd.Size = new System.Drawing.Size(204, 38);
             this.mmManageAdd.Text = "Добавить предмет";
             this.mmManageAdd.Click += new System.EventHandler(this.mmManageAdd_Click);
             // 
@@ -265,7 +267,7 @@
             this.mmManageEdit.Image = ((System.Drawing.Image)(resources.GetObject("mmManageEdit.Image")));
             this.mmManageEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mmManageEdit.Name = "mmManageEdit";
-            this.mmManageEdit.Size = new System.Drawing.Size(220, 38);
+            this.mmManageEdit.Size = new System.Drawing.Size(204, 38);
             this.mmManageEdit.Text = "Изменить предмет";
             this.mmManageEdit.Click += new System.EventHandler(this.mmManageEdit_Click);
             // 
@@ -281,14 +283,14 @@
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(201, 6);
             // 
             // mmManageExportToCSV
             // 
             this.mmManageExportToCSV.Image = ((System.Drawing.Image)(resources.GetObject("mmManageExportToCSV.Image")));
             this.mmManageExportToCSV.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mmManageExportToCSV.Name = "mmManageExportToCSV";
-            this.mmManageExportToCSV.Size = new System.Drawing.Size(220, 38);
+            this.mmManageExportToCSV.Size = new System.Drawing.Size(204, 38);
             this.mmManageExportToCSV.Text = "Экспорт в *.CSV";
             this.mmManageExportToCSV.Click += new System.EventHandler(this.mmManageExportToCSV_Click);
             // 
@@ -305,7 +307,7 @@
             this.mmHelpAbout.Image = ((System.Drawing.Image)(resources.GetObject("mmHelpAbout.Image")));
             this.mmHelpAbout.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mmHelpAbout.Name = "mmHelpAbout";
-            this.mmHelpAbout.Size = new System.Drawing.Size(196, 38);
+            this.mmHelpAbout.Size = new System.Drawing.Size(174, 38);
             this.mmHelpAbout.Text = "О программе";
             this.mmHelpAbout.Click += new System.EventHandler(this.mmHelpAbout_Click);
             // 
@@ -314,7 +316,8 @@
             this.statusBar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslToday,
-            this.tslDateTime});
+            this.tslDateTime,
+            this.statusSave});
             this.statusBar.Location = new System.Drawing.Point(0, 399);
             this.statusBar.Name = "statusBar";
             this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
@@ -462,6 +465,30 @@
             this.dgvAll.Size = new System.Drawing.Size(591, 309);
             this.dgvAll.TabIndex = 0;
             // 
+            // tpIsOkay
+            // 
+            this.tpIsOkay.BackColor = System.Drawing.SystemColors.Window;
+            this.tpIsOkay.Controls.Add(this.dataGridView1);
+            this.tpIsOkay.Location = new System.Drawing.Point(4, 24);
+            this.tpIsOkay.Name = "tpIsOkay";
+            this.tpIsOkay.Padding = new System.Windows.Forms.Padding(3);
+            this.tpIsOkay.Size = new System.Drawing.Size(597, 315);
+            this.tpIsOkay.TabIndex = 5;
+            this.tpIsOkay.Text = "Срок в порядке";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(591, 309);
+            this.dataGridView1.TabIndex = 0;
+            // 
             // tpSoon
             // 
             this.tpSoon.Controls.Add(this.dgvSoon);
@@ -552,6 +579,7 @@
             // 
             // butFilterReset
             // 
+            this.butFilterReset.Enabled = false;
             this.butFilterReset.Location = new System.Drawing.Point(6, 335);
             this.butFilterReset.Name = "butFilterReset";
             this.butFilterReset.Size = new System.Drawing.Size(209, 23);
@@ -712,34 +740,22 @@
             this.lbFIlterName.TabIndex = 0;
             this.lbFIlterName.Text = "Название:";
             // 
-            // tpIsOkay
-            // 
-            this.tpIsOkay.BackColor = System.Drawing.SystemColors.Window;
-            this.tpIsOkay.Controls.Add(this.dataGridView1);
-            this.tpIsOkay.Location = new System.Drawing.Point(4, 24);
-            this.tpIsOkay.Name = "tpIsOkay";
-            this.tpIsOkay.Padding = new System.Windows.Forms.Padding(3);
-            this.tpIsOkay.Size = new System.Drawing.Size(597, 315);
-            this.tpIsOkay.TabIndex = 5;
-            this.tpIsOkay.Text = "Срок в порядке";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(591, 309);
-            this.dataGridView1.TabIndex = 0;
-            // 
             // timerTime
             // 
             this.timerTime.Interval = 1000;
             this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
+            // 
+            // statusSave
+            // 
+            this.statusSave.Name = "statusSave";
+            this.statusSave.Size = new System.Drawing.Size(656, 17);
+            this.statusSave.Spring = true;
+            this.statusSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pushTimer
+            // 
+            this.pushTimer.Interval = 1000;
+            this.pushTimer.Tick += new System.EventHandler(this.pushTimer_Tick);
             // 
             // MainForm
             // 
@@ -765,6 +781,8 @@
             this.tabControlMain.ResumeLayout(false);
             this.tpAll.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAll)).EndInit();
+            this.tpIsOkay.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tpSoon.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoon)).EndInit();
             this.tpOverdue.ResumeLayout(false);
@@ -772,8 +790,6 @@
             this.panelForGb.ResumeLayout(false);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
-            this.tpIsOkay.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -843,6 +859,8 @@
         private System.Windows.Forms.TabPage tpIsOkay;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Timer timerTime;
+        private System.Windows.Forms.ToolStripStatusLabel statusSave;
+        private System.Windows.Forms.Timer pushTimer;
     }
 }
 

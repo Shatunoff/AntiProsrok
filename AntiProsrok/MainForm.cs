@@ -14,7 +14,6 @@ namespace AntiProsrok
     {
         string fileName = null; //Для хранения пути к открытой/сохраненной базе
         Items items; // Для хранения содержимого БД
-        DataGridView dgv = null; // Для хранения ссылки на активную таблицу
 
         public MainForm()
         {
@@ -23,7 +22,7 @@ namespace AntiProsrok
             tslDateTime.Text = DateTime.Now.ToString();
             timerTime.Start();
             cbFilterCategory.Items.Clear();
-            cbFilterCategory.Items.Add("");
+            cbFilterCategory.Items.Add(string.Empty);
             cbFilterCategory.Items.AddRange(Category.GetCategories().ToArray());
         }
 
@@ -41,17 +40,24 @@ namespace AntiProsrok
             return false;
         }
 
+        private DataGridView GetActiveDgv()
+        {
+            DataGridView dgv = null;
+            foreach (var item in tabControlMain.SelectedTab.Controls)
+            {
+                if (item.GetType() == typeof(DataGridView))
+                    dgv = (DataGridView)item;
+            }
+            return dgv;
+        }
+
         /// <summary>
         /// Получить индекс из столбца ID выделенной строки активной таблицы
         /// </summary>
         private int GetIndexFromActiveDgv()
         {
             // Ищем элемент DataGridView внутри активного TabPage
-            foreach (var item in tabControlMain.SelectedTab.Controls)
-            {
-                if (item.GetType() == typeof(DataGridView))
-                    dgv = (DataGridView)item;
-            }
+            DataGridView dgv = GetActiveDgv();
             // Если DataGridView найден и в нем выделена какая-то строка
             if (dgv != null && dgv.SelectedRows.Count > 0)
             {
@@ -68,6 +74,20 @@ namespace AntiProsrok
         {
             dgvAll.DataSource = items.GetItemsAsDataTable();
             //TODO: Обновлять все таблицы в этом методе
+        }
+
+        // Запуск таймера для отображения уведомления
+        private void PushTimerGo(string message)
+        {
+            pushTimer.Start();
+            statusSave.Text = message;
+        }
+
+        // Остановка таймера и стирание уведомления
+        private void pushTimer_Tick(object sender, EventArgs e)
+        {
+            statusSave.Text = string.Empty;
+            pushTimer.Stop();
         }
         #endregion
 
@@ -101,7 +121,10 @@ namespace AntiProsrok
         private void mmFileSave_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(fileName))
+            {
                 items.Save(fileName);
+                PushTimerGo("Склад сохранен!");
+            }
             else mmFileSaveAs.PerformClick();
         }
 
@@ -115,6 +138,7 @@ namespace AntiProsrok
             {
                 items.Save(saveFile.FileName);
                 fileName = saveFile.FileName;
+                PushTimerGo("Склад сохранен!");
             }
         }
 
@@ -137,7 +161,7 @@ namespace AntiProsrok
             if(catList.ShowDialog() == DialogResult.OK)
             {
                 cbFilterCategory.Items.Clear();
-                cbFilterCategory.Items.Add("");
+                cbFilterCategory.Items.Add(string.Empty);
                 cbFilterCategory.Items.AddRange(Category.GetCategories().ToArray());
             }
         }
@@ -163,6 +187,7 @@ namespace AntiProsrok
         // Управление - Изменить информацию о предмете
         private void mmManageEdit_Click(object sender, EventArgs e)
         {
+            DataGridView dgv = GetActiveDgv();
             int activeIndex = GetIndexFromActiveDgv(); // Получаем индекс выделенной строки активной таблицы
             if (activeIndex >= 0)
             {
@@ -191,7 +216,7 @@ namespace AntiProsrok
         // Управление - Выбросить в корзину
         private void mmManageToTrash_Click(object sender, EventArgs e)
         {
-            int activeIndex = GetIndexFromActiveDgv(); // Получаем индекс выделенной строки активной таблицы
+            int activeIndex = GetIndexFromActiveDgv(); // Получаем индекс столбца ID выделенной строки активной таблицы
             if (activeIndex >= 0)
             {
                 if (AreYouReady("Данное действие необратимо. Вы уверены?", "Удаление предмета"))
