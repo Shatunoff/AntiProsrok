@@ -92,6 +92,8 @@
             this.lbFIlterCategory = new System.Windows.Forms.Label();
             this.tbFilterName = new System.Windows.Forms.TextBox();
             this.lbFIlterName = new System.Windows.Forms.Label();
+            this.tpIsOkay = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.tsMain.SuspendLayout();
@@ -104,6 +106,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverdue)).BeginInit();
             this.panelForGb.SuspendLayout();
             this.gbFilter.SuspendLayout();
+            this.tpIsOkay.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -453,6 +457,7 @@
             // tabControlMain
             // 
             this.tabControlMain.Controls.Add(this.tpAll);
+            this.tabControlMain.Controls.Add(this.tpIsOkay);
             this.tabControlMain.Controls.Add(this.tpSoon);
             this.tabControlMain.Controls.Add(this.tpOverdue);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -518,7 +523,7 @@
             this.tpOverdue.Padding = new System.Windows.Forms.Padding(3);
             this.tpOverdue.Size = new System.Drawing.Size(583, 333);
             this.tpOverdue.TabIndex = 4;
-            this.tpOverdue.Text = "Просроченные предметы";
+            this.tpOverdue.Text = "Просрочка";
             this.tpOverdue.UseVisualStyleBackColor = true;
             // 
             // dgvOverdue
@@ -730,6 +735,29 @@
             this.lbFIlterName.TabIndex = 0;
             this.lbFIlterName.Text = "Название:";
             // 
+            // tpIsOkay
+            // 
+            this.tpIsOkay.BackColor = System.Drawing.Color.Transparent;
+            this.tpIsOkay.Controls.Add(this.dataGridView1);
+            this.tpIsOkay.Location = new System.Drawing.Point(4, 24);
+            this.tpIsOkay.Name = "tpIsOkay";
+            this.tpIsOkay.Padding = new System.Windows.Forms.Padding(3);
+            this.tpIsOkay.Size = new System.Drawing.Size(583, 333);
+            this.tpIsOkay.TabIndex = 5;
+            this.tpIsOkay.Text = "Срок в порядке";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(577, 327);
+            this.dataGridView1.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -761,6 +789,8 @@
             this.panelForGb.ResumeLayout(false);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
+            this.tpIsOkay.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -831,6 +861,8 @@
         private System.Windows.Forms.Button butFilterApply;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem mmManageExportToCSV;
+        private System.Windows.Forms.TabPage tpIsOkay;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
