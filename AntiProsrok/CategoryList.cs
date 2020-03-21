@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AntiProsrok
 {
-    public partial class AddItem : Form
+    public partial class CategoryList : Form
     {
-        public AddItem()
+        public CategoryList()
         {
             InitializeComponent();
         }

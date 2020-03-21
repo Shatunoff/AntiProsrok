@@ -57,20 +57,22 @@ namespace AntiProsrok
         // Управление - Категории
         private void mmManageCategory_Click(object sender, EventArgs e)
         {
-
+            CategoryList catList = new CategoryList();
+            catList.ShowDialog();
         }
 
         // Управление - Добавить предмет
         private void mmManageAdd_Click(object sender, EventArgs e)
         {
-            AddItem addItem = new AddItem();
+            ItemForm addItem = new ItemForm(ItemForm.ItemFormMode.Adding);
             addItem.ShowDialog();
         }
 
         // Управление - Изменить информацию о предмете
         private void mmManageEdit_Click(object sender, EventArgs e)
         {
-
+            ItemForm editItem = new ItemForm(ItemForm.ItemFormMode.Editing);
+            editItem.ShowDialog();
         }
 
         // Управление - Выбросить в корзину

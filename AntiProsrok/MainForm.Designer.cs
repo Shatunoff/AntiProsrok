@@ -497,7 +497,7 @@
             this.tpSoon.Location = new System.Drawing.Point(4, 24);
             this.tpSoon.Name = "tpSoon";
             this.tpSoon.Padding = new System.Windows.Forms.Padding(3);
-            this.tpSoon.Size = new System.Drawing.Size(583, 333);
+            this.tpSoon.Size = new System.Drawing.Size(543, 315);
             this.tpSoon.TabIndex = 1;
             this.tpSoon.Text = "Скоро закончится срок годности";
             this.tpSoon.UseVisualStyleBackColor = true;
@@ -511,7 +511,7 @@
             this.dgvSoon.Location = new System.Drawing.Point(3, 3);
             this.dgvSoon.Name = "dgvSoon";
             this.dgvSoon.ReadOnly = true;
-            this.dgvSoon.Size = new System.Drawing.Size(577, 327);
+            this.dgvSoon.Size = new System.Drawing.Size(537, 309);
             this.dgvSoon.TabIndex = 0;
             // 
             // tpOverdue
@@ -742,7 +742,7 @@
             this.tpIsOkay.Location = new System.Drawing.Point(4, 24);
             this.tpIsOkay.Name = "tpIsOkay";
             this.tpIsOkay.Padding = new System.Windows.Forms.Padding(3);
-            this.tpIsOkay.Size = new System.Drawing.Size(583, 333);
+            this.tpIsOkay.Size = new System.Drawing.Size(543, 315);
             this.tpIsOkay.TabIndex = 5;
             this.tpIsOkay.Text = "Срок в порядке";
             // 
@@ -755,7 +755,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(577, 327);
+            this.dataGridView1.Size = new System.Drawing.Size(537, 309);
             this.dataGridView1.TabIndex = 0;
             // 
             // MainForm
