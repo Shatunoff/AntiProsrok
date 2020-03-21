@@ -78,13 +78,13 @@
             // 
             // butOk
             // 
-            this.butOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.butOk.Location = new System.Drawing.Point(6, 232);
             this.butOk.Name = "butOk";
             this.butOk.Size = new System.Drawing.Size(235, 23);
             this.butOk.TabIndex = 5;
             this.butOk.Text = "[Кнопка ОК]";
             this.butOk.UseVisualStyleBackColor = true;
+            this.butOk.Click += new System.EventHandler(this.butOk_Click);
             // 
             // dtpDateToTrash
             // 

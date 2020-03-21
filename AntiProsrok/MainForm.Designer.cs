@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.mmFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,13 +59,9 @@
             this.tsbutOpen = new System.Windows.Forms.ToolStripButton();
             this.tsbutSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbutManageCategory = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbutAdd = new System.Windows.Forms.ToolStripButton();
             this.tsbutEdit = new System.Windows.Forms.ToolStripButton();
             this.tsbutToTrash = new System.Windows.Forms.ToolStripButton();
-            this.tstbQuickSearch = new System.Windows.Forms.ToolStripTextBox();
-            this.tslQuickSearch = new System.Windows.Forms.ToolStripLabel();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tpAll = new System.Windows.Forms.TabPage();
             this.dgvAll = new System.Windows.Forms.DataGridView();
@@ -94,6 +91,7 @@
             this.lbFIlterName = new System.Windows.Forms.Label();
             this.tpIsOkay = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.timerTime = new System.Windows.Forms.Timer(this.components);
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.tsMain.SuspendLayout();
@@ -276,8 +274,8 @@
             this.mmManageToTrash.Image = ((System.Drawing.Image)(resources.GetObject("mmManageToTrash.Image")));
             this.mmManageToTrash.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.mmManageToTrash.Name = "mmManageToTrash";
-            this.mmManageToTrash.Size = new System.Drawing.Size(220, 38);
-            this.mmManageToTrash.Text = "Выбросить в корзину";
+            this.mmManageToTrash.Size = new System.Drawing.Size(204, 38);
+            this.mmManageToTrash.Text = "Удалить предмет";
             this.mmManageToTrash.Click += new System.EventHandler(this.mmManageToTrash_Click);
             // 
             // toolStripSeparator4
@@ -345,13 +343,9 @@
             this.tsbutOpen,
             this.tsbutSave,
             this.toolStripSeparator1,
-            this.tsbutManageCategory,
-            this.toolStripSeparator3,
             this.tsbutAdd,
             this.tsbutEdit,
-            this.tsbutToTrash,
-            this.tstbQuickSearch,
-            this.tslQuickSearch});
+            this.tsbutToTrash});
             this.tsMain.Location = new System.Drawing.Point(0, 25);
             this.tsMain.Name = "tsMain";
             this.tsMain.Size = new System.Drawing.Size(551, 31);
@@ -393,66 +387,35 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
-            // tsbutManageCategory
-            // 
-            this.tsbutManageCategory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbutManageCategory.Image = ((System.Drawing.Image)(resources.GetObject("tsbutManageCategory.Image")));
-            this.tsbutManageCategory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbutManageCategory.Name = "tsbutManageCategory";
-            this.tsbutManageCategory.Size = new System.Drawing.Size(28, 28);
-            this.tsbutManageCategory.Text = "Управление категориями";
-            this.tsbutManageCategory.Click += new System.EventHandler(this.mmManageCategory_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
-            // 
             // tsbutAdd
             // 
-            this.tsbutAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbutAdd.Image = ((System.Drawing.Image)(resources.GetObject("tsbutAdd.Image")));
             this.tsbutAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbutAdd.Name = "tsbutAdd";
-            this.tsbutAdd.Size = new System.Drawing.Size(28, 28);
-            this.tsbutAdd.Text = "Добавить предмет";
+            this.tsbutAdd.Size = new System.Drawing.Size(94, 28);
+            this.tsbutAdd.Text = "Добавить";
+            this.tsbutAdd.ToolTipText = "Добавить предмет на склад";
             this.tsbutAdd.Click += new System.EventHandler(this.mmManageAdd_Click);
             // 
             // tsbutEdit
             // 
-            this.tsbutEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbutEdit.Image = ((System.Drawing.Image)(resources.GetObject("tsbutEdit.Image")));
             this.tsbutEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbutEdit.Name = "tsbutEdit";
-            this.tsbutEdit.Size = new System.Drawing.Size(28, 28);
-            this.tsbutEdit.Text = "Изменить информацию о предмете";
+            this.tsbutEdit.Size = new System.Drawing.Size(94, 28);
+            this.tsbutEdit.Text = "Изменить";
+            this.tsbutEdit.ToolTipText = "Изменить информацию о предмете";
             this.tsbutEdit.Click += new System.EventHandler(this.mmManageEdit_Click);
             // 
             // tsbutToTrash
             // 
-            this.tsbutToTrash.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbutToTrash.Image = ((System.Drawing.Image)(resources.GetObject("tsbutToTrash.Image")));
             this.tsbutToTrash.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbutToTrash.Name = "tsbutToTrash";
-            this.tsbutToTrash.Size = new System.Drawing.Size(28, 28);
-            this.tsbutToTrash.Text = "Выбросить в корзину";
+            this.tsbutToTrash.Size = new System.Drawing.Size(83, 28);
+            this.tsbutToTrash.Text = "Удалить";
+            this.tsbutToTrash.ToolTipText = "Удалить предмет со склада";
             this.tsbutToTrash.Click += new System.EventHandler(this.mmManageToTrash_Click);
-            // 
-            // tstbQuickSearch
-            // 
-            this.tstbQuickSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tstbQuickSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tstbQuickSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.tstbQuickSearch.Margin = new System.Windows.Forms.Padding(1, 0, 5, 0);
-            this.tstbQuickSearch.Name = "tstbQuickSearch";
-            this.tstbQuickSearch.Size = new System.Drawing.Size(200, 31);
-            // 
-            // tslQuickSearch
-            // 
-            this.tslQuickSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tslQuickSearch.Name = "tslQuickSearch";
-            this.tslQuickSearch.Size = new System.Drawing.Size(100, 28);
-            this.tslQuickSearch.Text = "Быстрый поиск:";
             // 
             // tabControlMain
             // 
@@ -585,6 +548,7 @@
             this.butFilterReset.TabIndex = 21;
             this.butFilterReset.Text = "Сбросить фильтр";
             this.butFilterReset.UseVisualStyleBackColor = true;
+            this.butFilterReset.Click += new System.EventHandler(this.butFilterReset_Click);
             // 
             // butFilterApply
             // 
@@ -594,6 +558,7 @@
             this.butFilterApply.TabIndex = 20;
             this.butFilterApply.Text = "Применить фильтр";
             this.butFilterApply.UseVisualStyleBackColor = true;
+            this.butFilterApply.Click += new System.EventHandler(this.butFilterApply_Click);
             // 
             // tbFilterComment
             // 
@@ -758,6 +723,11 @@
             this.dataGridView1.Size = new System.Drawing.Size(537, 309);
             this.dataGridView1.TabIndex = 0;
             // 
+            // timerTime
+            // 
+            this.timerTime.Interval = 1000;
+            this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -825,12 +795,9 @@
         private System.Windows.Forms.ToolStripButton tsbutOpen;
         private System.Windows.Forms.ToolStripButton tsbutSave;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton tsbutManageCategory;
         private System.Windows.Forms.ToolStripButton tsbutAdd;
         private System.Windows.Forms.ToolStripButton tsbutEdit;
         private System.Windows.Forms.ToolStripButton tsbutToTrash;
-        private System.Windows.Forms.ToolStripTextBox tstbQuickSearch;
-        private System.Windows.Forms.ToolStripLabel tslQuickSearch;
         private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tpAll;
         private System.Windows.Forms.TabPage tpSoon;
@@ -840,7 +807,6 @@
         private System.Windows.Forms.DataGridView dgvSoon;
         private System.Windows.Forms.TabPage tpOverdue;
         private System.Windows.Forms.DataGridView dgvOverdue;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.DateTimePicker dtpDateCreateDO;
         private System.Windows.Forms.CheckBox checkDateCreate;
         private System.Windows.Forms.DateTimePicker dtpDateCreateOT;
@@ -863,6 +829,7 @@
         private System.Windows.Forms.ToolStripMenuItem mmManageExportToCSV;
         private System.Windows.Forms.TabPage tpIsOkay;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Timer timerTime;
     }
 }
 
