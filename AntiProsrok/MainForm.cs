@@ -72,8 +72,14 @@ namespace AntiProsrok
         /// </summary>
         private void RefreshTable()
         {
-            dgvAll.DataSource = items.GetItemsAsDataTable();
-            //TODO: Обновлять все таблицы в этом методе
+            dgvAll.DataSource = items.GetAllItemsAsDataTable();
+            dgvAll.Columns[0].Visible = false;
+            dgvIsOkay.DataSource = items.GetIsOkayItemsAsDataTable();
+            dgvIsOkay.Columns[0].Visible = false;
+            dgvSoon.DataSource = items.GetIsSoonItemsAsDataTable();
+            dgvSoon.Columns[0].Visible = false;
+            dgvOverdue.DataSource = items.GetIsOverdueItemsAsDataTable();
+            dgvOverdue.Columns[0].Visible = false;
         }
 
         // Запуск таймера для отображения уведомления
@@ -171,6 +177,7 @@ namespace AntiProsrok
         {
             ItemForm add = new ItemForm(ItemForm.ItemFormMode.Adding);
             add.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
+            add.cbItemCategory.SelectedIndex = 0;
             if (add.ShowDialog() == DialogResult.OK)
             {
                 Item item = new Item();

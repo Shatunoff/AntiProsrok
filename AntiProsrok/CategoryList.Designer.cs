@@ -70,14 +70,14 @@
             this.tbCategoryName.Location = new System.Drawing.Point(6, 32);
             this.tbCategoryName.Name = "tbCategoryName";
             this.tbCategoryName.Size = new System.Drawing.Size(235, 21);
-            this.tbCategoryName.TabIndex = 5;
+            this.tbCategoryName.TabIndex = 0;
             // 
             // butCategoryAdd
             // 
             this.butCategoryAdd.Location = new System.Drawing.Point(6, 59);
             this.butCategoryAdd.Name = "butCategoryAdd";
             this.butCategoryAdd.Size = new System.Drawing.Size(112, 23);
-            this.butCategoryAdd.TabIndex = 4;
+            this.butCategoryAdd.TabIndex = 1;
             this.butCategoryAdd.Text = "Добавить";
             this.butCategoryAdd.UseVisualStyleBackColor = true;
             this.butCategoryAdd.Click += new System.EventHandler(this.butCategoryAdd_Click);
@@ -87,7 +87,7 @@
             this.butCategoryRemove.Location = new System.Drawing.Point(129, 59);
             this.butCategoryRemove.Name = "butCategoryRemove";
             this.butCategoryRemove.Size = new System.Drawing.Size(112, 23);
-            this.butCategoryRemove.TabIndex = 3;
+            this.butCategoryRemove.TabIndex = 2;
             this.butCategoryRemove.Text = "Удалить";
             this.butCategoryRemove.UseVisualStyleBackColor = true;
             this.butCategoryRemove.Click += new System.EventHandler(this.butCategoryRemove_Click);
@@ -98,7 +98,7 @@
             this.butOk.Location = new System.Drawing.Point(6, 233);
             this.butOk.Name = "butOk";
             this.butOk.Size = new System.Drawing.Size(235, 23);
-            this.butOk.TabIndex = 2;
+            this.butOk.TabIndex = 4;
             this.butOk.Text = "Сохранить категории";
             this.butOk.UseVisualStyleBackColor = true;
             this.butOk.Click += new System.EventHandler(this.butOk_Click);
@@ -109,7 +109,7 @@
             this.butCancel.Location = new System.Drawing.Point(6, 262);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(235, 23);
-            this.butCancel.TabIndex = 1;
+            this.butCancel.TabIndex = 5;
             this.butCancel.Text = "Отмена";
             this.butCancel.UseVisualStyleBackColor = true;
             // 
@@ -120,7 +120,7 @@
             this.lbCategoryList.Location = new System.Drawing.Point(6, 88);
             this.lbCategoryList.Name = "lbCategoryList";
             this.lbCategoryList.Size = new System.Drawing.Size(235, 139);
-            this.lbCategoryList.TabIndex = 0;
+            this.lbCategoryList.TabIndex = 3;
             // 
             // CategoryList
             // 

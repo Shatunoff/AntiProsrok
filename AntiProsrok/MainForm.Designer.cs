@@ -66,7 +66,7 @@
             this.tpAll = new System.Windows.Forms.TabPage();
             this.dgvAll = new System.Windows.Forms.DataGridView();
             this.tpIsOkay = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvIsOkay = new System.Windows.Forms.DataGridView();
             this.tpSoon = new System.Windows.Forms.TabPage();
             this.dgvSoon = new System.Windows.Forms.DataGridView();
             this.tpOverdue = new System.Windows.Forms.TabPage();
@@ -101,7 +101,7 @@
             this.tpAll.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAll)).BeginInit();
             this.tpIsOkay.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIsOkay)).BeginInit();
             this.tpSoon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoon)).BeginInit();
             this.tpOverdue.SuspendLayout();
@@ -449,6 +449,9 @@
             // 
             this.dgvAll.AllowUserToAddRows = false;
             this.dgvAll.AllowUserToDeleteRows = false;
+            this.dgvAll.AllowUserToResizeColumns = false;
+            this.dgvAll.AllowUserToResizeRows = false;
+            this.dgvAll.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAll.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvAll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAll.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -468,7 +471,7 @@
             // tpIsOkay
             // 
             this.tpIsOkay.BackColor = System.Drawing.SystemColors.Window;
-            this.tpIsOkay.Controls.Add(this.dataGridView1);
+            this.tpIsOkay.Controls.Add(this.dgvIsOkay);
             this.tpIsOkay.Location = new System.Drawing.Point(4, 24);
             this.tpIsOkay.Name = "tpIsOkay";
             this.tpIsOkay.Padding = new System.Windows.Forms.Padding(3);
@@ -476,18 +479,28 @@
             this.tpIsOkay.TabIndex = 5;
             this.tpIsOkay.Text = "Срок в порядке";
             // 
-            // dataGridView1
+            // dgvIsOkay
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(591, 309);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvIsOkay.AllowUserToAddRows = false;
+            this.dgvIsOkay.AllowUserToDeleteRows = false;
+            this.dgvIsOkay.AllowUserToResizeColumns = false;
+            this.dgvIsOkay.AllowUserToResizeRows = false;
+            this.dgvIsOkay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvIsOkay.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvIsOkay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvIsOkay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvIsOkay.Location = new System.Drawing.Point(3, 3);
+            this.dgvIsOkay.MultiSelect = false;
+            this.dgvIsOkay.Name = "dgvIsOkay";
+            this.dgvIsOkay.ReadOnly = true;
+            this.dgvIsOkay.RowHeadersVisible = false;
+            this.dgvIsOkay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvIsOkay.ShowCellErrors = false;
+            this.dgvIsOkay.ShowCellToolTips = false;
+            this.dgvIsOkay.ShowEditingIcon = false;
+            this.dgvIsOkay.ShowRowErrors = false;
+            this.dgvIsOkay.Size = new System.Drawing.Size(591, 309);
+            this.dgvIsOkay.TabIndex = 0;
             // 
             // tpSoon
             // 
@@ -504,12 +517,22 @@
             // 
             this.dgvSoon.AllowUserToAddRows = false;
             this.dgvSoon.AllowUserToDeleteRows = false;
+            this.dgvSoon.AllowUserToResizeColumns = false;
+            this.dgvSoon.AllowUserToResizeRows = false;
+            this.dgvSoon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSoon.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvSoon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSoon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSoon.Location = new System.Drawing.Point(3, 3);
+            this.dgvSoon.MultiSelect = false;
             this.dgvSoon.Name = "dgvSoon";
             this.dgvSoon.ReadOnly = true;
+            this.dgvSoon.RowHeadersVisible = false;
+            this.dgvSoon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSoon.ShowCellErrors = false;
+            this.dgvSoon.ShowCellToolTips = false;
+            this.dgvSoon.ShowEditingIcon = false;
+            this.dgvSoon.ShowRowErrors = false;
             this.dgvSoon.Size = new System.Drawing.Size(591, 309);
             this.dgvSoon.TabIndex = 0;
             // 
@@ -529,12 +552,22 @@
             // 
             this.dgvOverdue.AllowUserToAddRows = false;
             this.dgvOverdue.AllowUserToDeleteRows = false;
+            this.dgvOverdue.AllowUserToResizeColumns = false;
+            this.dgvOverdue.AllowUserToResizeRows = false;
+            this.dgvOverdue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOverdue.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvOverdue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOverdue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOverdue.Location = new System.Drawing.Point(3, 3);
+            this.dgvOverdue.MultiSelect = false;
             this.dgvOverdue.Name = "dgvOverdue";
             this.dgvOverdue.ReadOnly = true;
+            this.dgvOverdue.RowHeadersVisible = false;
+            this.dgvOverdue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOverdue.ShowCellErrors = false;
+            this.dgvOverdue.ShowCellToolTips = false;
+            this.dgvOverdue.ShowEditingIcon = false;
+            this.dgvOverdue.ShowRowErrors = false;
             this.dgvOverdue.Size = new System.Drawing.Size(591, 309);
             this.dgvOverdue.TabIndex = 0;
             // 
@@ -583,7 +616,7 @@
             this.butFilterReset.Location = new System.Drawing.Point(6, 335);
             this.butFilterReset.Name = "butFilterReset";
             this.butFilterReset.Size = new System.Drawing.Size(209, 23);
-            this.butFilterReset.TabIndex = 21;
+            this.butFilterReset.TabIndex = 10;
             this.butFilterReset.Text = "Сбросить фильтр";
             this.butFilterReset.UseVisualStyleBackColor = true;
             this.butFilterReset.Click += new System.EventHandler(this.butFilterReset_Click);
@@ -593,7 +626,7 @@
             this.butFilterApply.Location = new System.Drawing.Point(6, 306);
             this.butFilterApply.Name = "butFilterApply";
             this.butFilterApply.Size = new System.Drawing.Size(209, 23);
-            this.butFilterApply.TabIndex = 20;
+            this.butFilterApply.TabIndex = 9;
             this.butFilterApply.Text = "Применить фильтр";
             this.butFilterApply.UseVisualStyleBackColor = true;
             this.butFilterApply.Click += new System.EventHandler(this.butFilterApply_Click);
@@ -603,7 +636,7 @@
             this.tbFilterComment.Location = new System.Drawing.Point(6, 121);
             this.tbFilterComment.Name = "tbFilterComment";
             this.tbFilterComment.Size = new System.Drawing.Size(209, 21);
-            this.tbFilterComment.TabIndex = 19;
+            this.tbFilterComment.TabIndex = 2;
             // 
             // lbFIlterComment
             // 
@@ -638,7 +671,7 @@
             this.dtpDateToTrashDO.Location = new System.Drawing.Point(35, 279);
             this.dtpDateToTrashDO.Name = "dtpDateToTrashDO";
             this.dtpDateToTrashDO.Size = new System.Drawing.Size(180, 21);
-            this.dtpDateToTrashDO.TabIndex = 15;
+            this.dtpDateToTrashDO.TabIndex = 8;
             // 
             // checkDateToTrash
             // 
@@ -646,7 +679,7 @@
             this.checkDateToTrash.Location = new System.Drawing.Point(6, 227);
             this.checkDateToTrash.Name = "checkDateToTrash";
             this.checkDateToTrash.Size = new System.Drawing.Size(132, 19);
-            this.checkDateToTrash.TabIndex = 14;
+            this.checkDateToTrash.TabIndex = 6;
             this.checkDateToTrash.Text = "По сроку годности";
             this.checkDateToTrash.UseVisualStyleBackColor = true;
             this.checkDateToTrash.CheckStateChanged += new System.EventHandler(this.checkDateToTrash_CheckStateChanged);
@@ -657,7 +690,7 @@
             this.dtpDateToTrashOT.Location = new System.Drawing.Point(35, 252);
             this.dtpDateToTrashOT.Name = "dtpDateToTrashOT";
             this.dtpDateToTrashOT.Size = new System.Drawing.Size(180, 21);
-            this.dtpDateToTrashOT.TabIndex = 13;
+            this.dtpDateToTrashOT.TabIndex = 7;
             // 
             // label3
             // 
@@ -683,7 +716,7 @@
             this.dtpDateCreateDO.Location = new System.Drawing.Point(35, 200);
             this.dtpDateCreateDO.Name = "dtpDateCreateDO";
             this.dtpDateCreateDO.Size = new System.Drawing.Size(180, 21);
-            this.dtpDateCreateDO.TabIndex = 9;
+            this.dtpDateCreateDO.TabIndex = 5;
             // 
             // checkDateCreate
             // 
@@ -691,7 +724,7 @@
             this.checkDateCreate.Location = new System.Drawing.Point(6, 148);
             this.checkDateCreate.Name = "checkDateCreate";
             this.checkDateCreate.Size = new System.Drawing.Size(157, 19);
-            this.checkDateCreate.TabIndex = 8;
+            this.checkDateCreate.TabIndex = 3;
             this.checkDateCreate.Text = "По дате изготовления";
             this.checkDateCreate.UseVisualStyleBackColor = true;
             this.checkDateCreate.CheckStateChanged += new System.EventHandler(this.checkDateCreate_CheckStateChanged);
@@ -702,7 +735,7 @@
             this.dtpDateCreateOT.Location = new System.Drawing.Point(35, 173);
             this.dtpDateCreateOT.Name = "dtpDateCreateOT";
             this.dtpDateCreateOT.Size = new System.Drawing.Size(180, 21);
-            this.dtpDateCreateOT.TabIndex = 5;
+            this.dtpDateCreateOT.TabIndex = 4;
             // 
             // cbFilterCategory
             // 
@@ -713,7 +746,7 @@
             this.cbFilterCategory.Location = new System.Drawing.Point(6, 77);
             this.cbFilterCategory.Name = "cbFilterCategory";
             this.cbFilterCategory.Size = new System.Drawing.Size(209, 23);
-            this.cbFilterCategory.TabIndex = 3;
+            this.cbFilterCategory.TabIndex = 1;
             // 
             // lbFIlterCategory
             // 
@@ -729,7 +762,7 @@
             this.tbFilterName.Location = new System.Drawing.Point(6, 35);
             this.tbFilterName.Name = "tbFilterName";
             this.tbFilterName.Size = new System.Drawing.Size(209, 21);
-            this.tbFilterName.TabIndex = 1;
+            this.tbFilterName.TabIndex = 0;
             // 
             // lbFIlterName
             // 
@@ -747,8 +780,9 @@
             // 
             // statusSave
             // 
+            this.statusSave.ForeColor = System.Drawing.Color.Green;
             this.statusSave.Name = "statusSave";
-            this.statusSave.Size = new System.Drawing.Size(656, 17);
+            this.statusSave.Size = new System.Drawing.Size(625, 17);
             this.statusSave.Spring = true;
             this.statusSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -782,7 +816,7 @@
             this.tpAll.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAll)).EndInit();
             this.tpIsOkay.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvIsOkay)).EndInit();
             this.tpSoon.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSoon)).EndInit();
             this.tpOverdue.ResumeLayout(false);
@@ -857,7 +891,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem mmManageExportToCSV;
         private System.Windows.Forms.TabPage tpIsOkay;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvIsOkay;
         private System.Windows.Forms.Timer timerTime;
         private System.Windows.Forms.ToolStripStatusLabel statusSave;
         private System.Windows.Forms.Timer pushTimer;

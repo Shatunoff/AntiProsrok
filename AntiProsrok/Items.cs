@@ -40,10 +40,7 @@ namespace AntiProsrok
             }
         }
 
-        /// <summary>
-        /// Получить текущий список предметов
-        /// </summary>
-        public DataTable GetItemsAsDataTable()
+        private DataTable dtCreate()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
@@ -52,6 +49,15 @@ namespace AntiProsrok
             dt.Columns.Add("Примечание", typeof(string));
             dt.Columns.Add("Дата изготовления", typeof(string));
             dt.Columns.Add("Годен ДО", typeof(string));
+            return dt;
+        }
+
+        /// <summary>
+        /// Получить текущий список всех предметов
+        /// </summary>
+        public DataTable GetAllItemsAsDataTable()
+        {
+            DataTable dt = dtCreate();
 
             if (list.Count > 0)
             {
@@ -62,31 +68,89 @@ namespace AntiProsrok
             return dt;
         }
 
-        //public DataTable GetItemsAsDataTable(string findText)
-        //{
-        //    DataTable dt = new DataTable();
-        //    dt.Columns.Add("ID", typeof(int));
-        //    dt.Columns.Add("Название книги", typeof(string));
-        //    dt.Columns.Add("Автор(ы)", typeof(string));
-        //    dt.Columns.Add("Год", typeof(string));
-        //    dt.Columns.Add("Жанр", typeof(string));
-        //    dt.Columns.Add("Издательство", typeof(string));
+        /// <summary>
+        /// Получить список предметов, срок годности которых заканчивается больше чем через 7 дней.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetIsOkayItemsAsDataTable()
+        {
+            DateTime dtTrash;
+            TimeSpan dtime;
+            DataTable dt = dtCreate();
 
-        //    if (list.Count > 0)
-        //    {
-        //        for (int i = 0; i < list.Count; i++)
-        //        {
-        //            if (list[i].Title.ToLower().Contains(findText.ToLower()) ||
-        //                list[i].Author.ToLower().Contains(findText.ToLower()) ||
-        //                list[i].Publisher.ToLower().Contains(findText.ToLower()) ||
-        //                list[i].Style.ToLower().Contains(findText.ToLower()) ||
-        //                list[i].Year.Contains(findText))
-        //                dt.Rows.Add(i, list[i].Title, list[i].Author, list[i].Year, list[i].Style, list[i].Publisher);
-        //        }
-        //    }
+            if (list.Count > 0)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    dtTrash = DateTime.Parse(list[i].DateToTrash); // Годен ДО
+                    if (dtTrash > DateTime.Now)
+                    {
+                        dtime = dtTrash - DateTime.Now;
+                        if (dtime.Days > 7)
+                        {
+                            dt.Rows.Add(i, list[i].Title, list[i].Category, list[i].Comment,
+                            list[i].DateOfCreate, list[i].DateToTrash);
+                        }
+                    }
+                }
+            }
 
-        //    return dt;
-        //}
+            return dt;
+        }
+
+        /// <summary>
+        /// Получить список просрочки
+        /// </summary>
+        public DataTable GetIsOverdueItemsAsDataTable()
+        {
+            DateTime dtTrash;
+            DataTable dt = dtCreate();
+
+            if (list.Count > 0)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    dtTrash = DateTime.Parse(list[i].DateToTrash); // Годен ДО
+                    if (dtTrash < DateTime.Now)
+                    {
+                        dt.Rows.Add(i, list[i].Title, list[i].Category, list[i].Comment, 
+                            list[i].DateOfCreate, list[i].DateToTrash);
+                    }
+                }
+            }
+
+            return dt;
+        }
+
+        /// <summary>
+        /// Получить список предметов, срок годности которых заканчивается через 7 и менее дней.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetIsSoonItemsAsDataTable()
+        {
+            DateTime dtTrash;
+            TimeSpan dtime;
+            DataTable dt = dtCreate();
+
+            if (list.Count > 0)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    dtTrash = DateTime.Parse(list[i].DateToTrash); // Годен ДО
+                    if (dtTrash > DateTime.Now)
+                    {
+                        dtime = dtTrash - DateTime.Now;
+                        if (dtime.Days <= 7)
+                        {
+                            dt.Rows.Add(i, list[i].Title, list[i].Category, list[i].Comment,
+                            list[i].DateOfCreate, list[i].DateToTrash);
+                        }
+                    }
+                }
+            }
+
+            return dt;
+        }
 
         /// <summary>
         /// Добавление книги в список
