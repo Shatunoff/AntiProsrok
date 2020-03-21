@@ -12,8 +12,9 @@ namespace AntiProsrok
 {
     public partial class MainForm : Form
     {
-        string fileName = null;
-        Items items;
+        string fileName = null; //Для хранения пути к открытой/сохраненной базе
+        Items items; // Для хранения содержимого БД
+        DataGridView dgv = null; // Для хранения ссылки на активную таблицу
 
         public MainForm()
         {
@@ -45,8 +46,19 @@ namespace AntiProsrok
         /// </summary>
         private int GetIndexFromActiveDgv()
         {
-            // TODO: Получить индекс из столбца ID выделенной строки активной таблицы
-            return -1;
+            // Ищем элемент DataGridView внутри активного TabPage
+            foreach (var item in tabControlMain.SelectedTab.Controls)
+            {
+                if (item.GetType() == typeof(DataGridView))
+                    dgv = (DataGridView)item;
+            }
+            // Если DataGridView найден и в нем выделена какая-то строка
+            if (dgv != null && dgv.SelectedRows.Count > 0)
+            {
+                return (int) dgv.SelectedRows[0].Cells[0].Value;
+            }
+            else
+                return -1; // Возвращаем -1, если что-то пошло не так.
         }
 
         /// <summary>
@@ -156,6 +168,12 @@ namespace AntiProsrok
             {
                 ItemForm edit = new ItemForm(ItemForm.ItemFormMode.Editing);
                 edit.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
+                edit.tbItemName.Text = (string)dgv.SelectedRows[0].Cells[1].Value;
+                edit.cbItemCategory.SelectedItem = (string)dgv.SelectedRows[0].Cells[2].Value;
+                edit.tbItemComment.Text = (string)dgv.SelectedRows[0].Cells[3].Value;
+                edit.dtpDateCreate.Text = (string)dgv.SelectedRows[0].Cells[4].Value;
+                edit.dtpDateToTrash.Text = (string)dgv.SelectedRows[0].Cells[5].Value;
+
                 if (edit.ShowDialog() == DialogResult.OK)
                 {
                     Item item = new Item();
@@ -174,10 +192,13 @@ namespace AntiProsrok
         private void mmManageToTrash_Click(object sender, EventArgs e)
         {
             int activeIndex = GetIndexFromActiveDgv(); // Получаем индекс выделенной строки активной таблицы
-            if (AreYouReady("Данное действие необратимо. Вы уверены?", "Удаление предмета"))
+            if (activeIndex >= 0)
             {
-                items.RemoveAt(activeIndex);
-                RefreshTable();
+                if (AreYouReady("Данное действие необратимо. Вы уверены?", "Удаление предмета"))
+                {
+                    items.RemoveAt(activeIndex);
+                    RefreshTable();
+                }
             }
         }
 
@@ -206,14 +227,22 @@ namespace AntiProsrok
             dtpDateToTrashOT.Enabled = dtpDateToTrashDO.Enabled = checkDateToTrash.Checked;
         }
 
+        // Применить фильтр
         private void butFilterApply_Click(object sender, EventArgs e)
         {
             // TODO: Применить фильтр
+            butFilterReset.Enabled = true;
         }
 
+        // Сбросить фильтр
         private void butFilterReset_Click(object sender, EventArgs e)
         {
-            // TODO: Сбросить фильтр
+            butFilterReset.Enabled = false;
+            tbFilterName.Text = string.Empty;
+            cbFilterCategory.SelectedIndex = 0;
+            tbFilterComment.Text = string.Empty;
+            checkDateCreate.CheckState = CheckState.Unchecked;
+            checkDateToTrash.CheckState = CheckState.Unchecked;
         }
         #endregion
 
