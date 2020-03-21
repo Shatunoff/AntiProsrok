@@ -88,7 +88,9 @@ namespace AntiProsrok
         // Файл - Сохранить
         private void mmFileSave_Click(object sender, EventArgs e)
         {
-            // TODO: Файл - Сохранить
+            if (!string.IsNullOrEmpty(fileName))
+                items.Save(fileName);
+            else mmFileSaveAs.PerformClick();
         }
 
         // Файл - Сохранить как
