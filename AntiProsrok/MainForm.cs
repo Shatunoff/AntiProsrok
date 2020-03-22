@@ -277,7 +277,7 @@ namespace AntiProsrok
         // Применить фильтр
         private void butFilterApply_Click(object sender, EventArgs e)
         {
-            if (dtpDateCreateOT.Value > dtpDateCreateDO.Value || dtpDateToTrashOT.Value > dtpDateToTrashDO.Value)
+            if ((checkDateCreate.Checked || checkDateToTrash.Checked) && (dtpDateCreateOT.Value > dtpDateCreateDO.Value || dtpDateToTrashOT.Value > dtpDateToTrashDO.Value))
             {
                 MessageBox.Show("Диапазон дат указан неверно!", "Ошибка", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
