@@ -61,6 +61,7 @@
     <Compile Include="CategoryList.Designer.cs">
       <DependentUpon>CategoryList.cs</DependentUpon>
     </Compile>
+    <Compile Include="FromToCSV.cs" />
     <Compile Include="ItemForm.cs">
       <SubType>Form</SubType>
     </Compile>

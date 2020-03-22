@@ -54,6 +54,7 @@
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.tslToday = new System.Windows.Forms.ToolStripStatusLabel();
             this.tslDateTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusSave = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.tsbutCreateNew = new System.Windows.Forms.ToolStripButton();
             this.tsbutOpen = new System.Windows.Forms.ToolStripButton();
@@ -92,7 +93,6 @@
             this.tbFilterName = new System.Windows.Forms.TextBox();
             this.lbFIlterName = new System.Windows.Forms.Label();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
-            this.statusSave = new System.Windows.Forms.ToolStripStatusLabel();
             this.pushTimer = new System.Windows.Forms.Timer(this.components);
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -336,6 +336,14 @@
             this.tslDateTime.Name = "tslDateTime";
             this.tslDateTime.Size = new System.Drawing.Size(105, 17);
             this.tslDateTime.Text = "21.03.2020 10:07";
+            // 
+            // statusSave
+            // 
+            this.statusSave.ForeColor = System.Drawing.Color.Green;
+            this.statusSave.Name = "statusSave";
+            this.statusSave.Size = new System.Drawing.Size(656, 17);
+            this.statusSave.Spring = true;
+            this.statusSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tsMain
             // 
@@ -777,14 +785,6 @@
             // 
             this.timerTime.Interval = 1000;
             this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
-            // 
-            // statusSave
-            // 
-            this.statusSave.ForeColor = System.Drawing.Color.Green;
-            this.statusSave.Name = "statusSave";
-            this.statusSave.Size = new System.Drawing.Size(625, 17);
-            this.statusSave.Spring = true;
-            this.statusSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // pushTimer
             // 

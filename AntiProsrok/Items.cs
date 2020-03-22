@@ -71,7 +71,6 @@ namespace AntiProsrok
         /// <summary>
         /// Получить список предметов, срок годности которых заканчивается больше чем через 7 дней.
         /// </summary>
-        /// <returns></returns>
         public DataTable GetIsOkayItemsAsDataTable()
         {
             DateTime dtTrash;
@@ -125,7 +124,6 @@ namespace AntiProsrok
         /// <summary>
         /// Получить список предметов, срок годности которых заканчивается через 7 и менее дней.
         /// </summary>
-        /// <returns></returns>
         public DataTable GetIsSoonItemsAsDataTable()
         {
             DateTime dtTrash;
@@ -266,5 +264,23 @@ namespace AntiProsrok
             }
         }
 
+        public void ExportToCSV(string fileName)
+        {
+            FileStream fs = null;
+
+            try
+            {
+                fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
+                ToCSV.Export(fs, list);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                fs?.Close();
+            }
+        }
     }
 }

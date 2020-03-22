@@ -19,6 +19,7 @@ namespace AntiProsrok
         {
             InitializeComponent();
             items = new Items();
+            RefreshTable();
             tslDateTime.Text = DateTime.Now.ToString();
             timerTime.Start();
             cbFilterCategory.Items.Clear();
@@ -104,9 +105,16 @@ namespace AntiProsrok
             if (fileName != null)
             {
                 if (AreYouReady("Несохранённые изменения будут утеряны.", "Создать новый склад?"))
+                {
                     items = new Items();
+                    RefreshTable();
+                }
             }
-            else items = new Items();
+            else
+            {
+                items = new Items();
+                RefreshTable();
+            }
         }
 
         // Файл - Открыть существующий склад
@@ -237,7 +245,11 @@ namespace AntiProsrok
         // Управление - Экспорт в *.CSV
         private void mmManageExportToCSV_Click(object sender, EventArgs e)
         {
-            // TODO: Управление - Экспорт в *.CSV
+            SaveFileDialog save = new SaveFileDialog();
+            save.Title = "Экспорт склада в *.CSV";
+            save.Filter = "CSV - файлы|*.csv";
+            if (save.ShowDialog() == DialogResult.OK)
+                items.ExportToCSV(save.FileName);
         }
 
         // Справка - О программе
@@ -282,6 +294,5 @@ namespace AntiProsrok
         {
             tslDateTime.Text = DateTime.Now.ToString();
         }
-
     }
 }
