@@ -249,7 +249,10 @@ namespace AntiProsrok
             save.Title = "Экспорт склада в *.CSV";
             save.Filter = "CSV - файлы|*.csv";
             if (save.ShowDialog() == DialogResult.OK)
+            {
                 items.ExportToCSV(save.FileName);
+                PushTimerGo("Экспорт успешно завершен!");
+            }
         }
 
         // Справка - О программе
@@ -274,7 +277,42 @@ namespace AntiProsrok
         // Применить фильтр
         private void butFilterApply_Click(object sender, EventArgs e)
         {
-            // TODO: Применить фильтр
+            if (dtpDateCreateOT.Value > dtpDateCreateDO.Value || dtpDateToTrashOT.Value > dtpDateToTrashDO.Value)
+            {
+                MessageBox.Show("Диапазон дат указан неверно!", "Ошибка", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            DateTime dtCreateOT, dtCreateDO, dtTrashOT, dtTrashDO;
+            if (checkDateCreate.Checked)
+            {
+                dtCreateOT = DateTime.Parse(dtpDateCreateOT.Value.ToShortDateString());
+                dtCreateDO = DateTime.Parse(dtpDateCreateDO.Value.ToShortDateString());
+            }
+            else
+            {
+                dtCreateOT = DateTime.MinValue;
+                dtCreateDO = DateTime.MaxValue;
+            }
+
+            if (checkDateToTrash.Checked)
+            {
+                dtTrashOT = DateTime.Parse(dtpDateToTrashOT.Value.ToShortDateString());
+                dtTrashDO = DateTime.Parse(dtpDateToTrashDO.Value.ToShortDateString());
+            }
+            else
+            {
+                dtTrashOT = DateTime.MinValue;
+                dtTrashDO = DateTime.MaxValue;
+            }
+            dgvAll.DataSource = items.GetAllItemsAsDataTable(tbFilterName.Text, cbFilterCategory.Text,
+                tbFilterComment.Text, dtCreateOT, dtCreateDO, dtTrashOT, dtTrashDO);
+            dgvIsOkay.DataSource = items.GetIsOkayItemsAsDataTable(tbFilterName.Text, cbFilterCategory.Text,
+                tbFilterComment.Text, dtCreateOT, dtCreateDO, dtTrashOT, dtTrashDO);
+            dgvSoon.DataSource = items.GetIsSoonItemsAsDataTable(tbFilterName.Text, cbFilterCategory.Text,
+                tbFilterComment.Text, dtCreateOT, dtCreateDO, dtTrashOT, dtTrashDO);
+            dgvOverdue.DataSource = items.GetIsOverdueItemsAsDataTable(tbFilterName.Text, cbFilterCategory.Text,
+                tbFilterComment.Text, dtCreateOT, dtCreateDO, dtTrashOT, dtTrashDO);
             butFilterReset.Enabled = true;
         }
 
@@ -284,9 +322,14 @@ namespace AntiProsrok
             butFilterReset.Enabled = false;
             tbFilterName.Text = string.Empty;
             cbFilterCategory.SelectedIndex = 0;
+            dtpDateCreateOT.Value = DateTime.Now;
+            dtpDateCreateDO.Value = DateTime.Now;
+            dtpDateToTrashOT.Value = DateTime.Now;
+            dtpDateToTrashDO.Value = DateTime.Now;
             tbFilterComment.Text = string.Empty;
             checkDateCreate.CheckState = CheckState.Unchecked;
             checkDateToTrash.CheckState = CheckState.Unchecked;
+            RefreshTable();
         }
         #endregion
 
