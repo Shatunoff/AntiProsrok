@@ -54,8 +54,8 @@ namespace AntiProsrok
             dt.Columns.Add("Название предмета", typeof(string));
             dt.Columns.Add("Категория", typeof(string));
             dt.Columns.Add("Примечание", typeof(string));
-            dt.Columns.Add("Дата изготовления", typeof(string));
-            dt.Columns.Add("Годен ДО", typeof(string));
+            dt.Columns.Add("Дата изготовления", typeof(DateTime));
+            dt.Columns.Add("Годен ДО", typeof(DateTime));
             return dt;
         }
 
