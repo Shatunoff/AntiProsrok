@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.mmFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mmFileCreateNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,6 +98,10 @@
             this.lbFIlterName = new System.Windows.Forms.Label();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
             this.pushTimer = new System.Windows.Forms.Timer(this.components);
+            this.notifyIconTrey = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cmsTrey = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsShowProgram = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsExitProgram = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.tsMain.SuspendLayout();
@@ -108,6 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOverdue)).BeginInit();
             this.panelForGb.SuspendLayout();
             this.gbFilter.SuspendLayout();
+            this.cmsTrey.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -462,11 +471,18 @@
             this.dgvAll.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAll.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvAll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvAll.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAll.Location = new System.Drawing.Point(3, 3);
             this.dgvAll.MultiSelect = false;
             this.dgvAll.Name = "dgvAll";
-            this.dgvAll.ReadOnly = true;
             this.dgvAll.RowHeadersVisible = false;
             this.dgvAll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAll.ShowCellErrors = false;
@@ -496,11 +512,18 @@
             this.dgvIsOkay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvIsOkay.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvIsOkay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvIsOkay.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvIsOkay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvIsOkay.Location = new System.Drawing.Point(3, 3);
             this.dgvIsOkay.MultiSelect = false;
             this.dgvIsOkay.Name = "dgvIsOkay";
-            this.dgvIsOkay.ReadOnly = true;
             this.dgvIsOkay.RowHeadersVisible = false;
             this.dgvIsOkay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvIsOkay.ShowCellErrors = false;
@@ -530,11 +553,18 @@
             this.dgvSoon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSoon.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvSoon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvSoon.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvSoon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSoon.Location = new System.Drawing.Point(3, 3);
             this.dgvSoon.MultiSelect = false;
             this.dgvSoon.Name = "dgvSoon";
-            this.dgvSoon.ReadOnly = true;
             this.dgvSoon.RowHeadersVisible = false;
             this.dgvSoon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSoon.ShowCellErrors = false;
@@ -565,11 +595,18 @@
             this.dgvOverdue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOverdue.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvOverdue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOverdue.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvOverdue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOverdue.Location = new System.Drawing.Point(3, 3);
             this.dgvOverdue.MultiSelect = false;
             this.dgvOverdue.Name = "dgvOverdue";
-            this.dgvOverdue.ReadOnly = true;
             this.dgvOverdue.RowHeadersVisible = false;
             this.dgvOverdue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOverdue.ShowCellErrors = false;
@@ -791,6 +828,37 @@
             this.pushTimer.Interval = 1000;
             this.pushTimer.Tick += new System.EventHandler(this.pushTimer_Tick);
             // 
+            // notifyIconTrey
+            // 
+            this.notifyIconTrey.ContextMenuStrip = this.cmsTrey;
+            this.notifyIconTrey.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIconTrey.Icon")));
+            this.notifyIconTrey.Text = "АнтиПросрочка";
+            this.notifyIconTrey.Visible = true;
+            this.notifyIconTrey.BalloonTipClicked += new System.EventHandler(this.notifyIconTrey_DoubleClick);
+            this.notifyIconTrey.DoubleClick += new System.EventHandler(this.notifyIconTrey_DoubleClick);
+            // 
+            // cmsTrey
+            // 
+            this.cmsTrey.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsShowProgram,
+            this.cmsExitProgram});
+            this.cmsTrey.Name = "cmsTrey";
+            this.cmsTrey.Size = new System.Drawing.Size(194, 48);
+            // 
+            // cmsShowProgram
+            // 
+            this.cmsShowProgram.Name = "cmsShowProgram";
+            this.cmsShowProgram.Size = new System.Drawing.Size(193, 22);
+            this.cmsShowProgram.Text = "Показать программу";
+            this.cmsShowProgram.Click += new System.EventHandler(this.notifyIconTrey_DoubleClick);
+            // 
+            // cmsExitProgram
+            // 
+            this.cmsExitProgram.Name = "cmsExitProgram";
+            this.cmsExitProgram.Size = new System.Drawing.Size(193, 22);
+            this.cmsExitProgram.Text = "Выйти из программы";
+            this.cmsExitProgram.Click += new System.EventHandler(this.mmFileExit_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -804,8 +872,10 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
+            this.MinimumSize = new System.Drawing.Size(850, 460);
             this.Name = "MainForm";
-            this.Text = "АнтиПросрочка";
+            this.Text = "АнтиПросрочка V1.1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.statusBar.ResumeLayout(false);
@@ -824,6 +894,7 @@
             this.panelForGb.ResumeLayout(false);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
+            this.cmsTrey.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -895,6 +966,10 @@
         private System.Windows.Forms.Timer timerTime;
         private System.Windows.Forms.ToolStripStatusLabel statusSave;
         private System.Windows.Forms.Timer pushTimer;
+        private System.Windows.Forms.NotifyIcon notifyIconTrey;
+        private System.Windows.Forms.ContextMenuStrip cmsTrey;
+        private System.Windows.Forms.ToolStripMenuItem cmsShowProgram;
+        private System.Windows.Forms.ToolStripMenuItem cmsExitProgram;
     }
 }
 

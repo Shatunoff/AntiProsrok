@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AntiProsrok
@@ -19,7 +20,21 @@ namespace AntiProsrok
         {
             InitializeComponent();
             items = new Items();
+            fileName = Properties.Settings.Default.lastFile;
+            if (File.Exists(fileName))
+            {
+                items.Load(fileName);
+            }
+            else 
+                fileName = null;
             RefreshTable();
+            if (fileName != null)
+            {
+                notifyIconTrey.BalloonTipIcon = ToolTipIcon.Info;
+                notifyIconTrey.BalloonTipTitle = "Отчет со склада";
+                notifyIconTrey.BalloonTipText = InfoMessageToString();
+                notifyIconTrey.ShowBalloonTip(300);
+            }
             tslDateTime.Text = DateTime.Now.ToString();
             timerTime.Start();
             cbFilterCategory.Items.Clear();
@@ -41,6 +56,9 @@ namespace AntiProsrok
             return false;
         }
 
+        /// <summary>
+        /// Получить активную таблицу
+        /// </summary>
         private DataGridView GetActiveDgv()
         {
             DataGridView dgv = null;
@@ -53,6 +71,38 @@ namespace AntiProsrok
         }
 
         /// <summary>
+        /// Получить список отмеченных галочкой предметов
+        /// </summary>
+        private Item[] GetCheckItemsFromActiveDgv()
+        {
+            List<Item> listForRemove = new List<Item>();
+            DataGridView dgv = GetActiveDgv();
+            if (dgv != null)
+            {
+                for (int i = 0; i < dgv.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dgv.Columns.Count; j++)
+                    {
+                        if (dgv.Columns[j] is DataGridViewCheckBoxColumn)
+                        {
+                            if ((bool)dgv[j, i].EditedFormattedValue)
+                            {
+                                Item item = new Item();
+                                for (int x = 0; x < dgv.Columns.Count; x++)
+                                {
+                                    if (dgv.Columns[x].HeaderText == items.ColIDHeaderText)
+                                        item = items[Convert.ToInt32(dgv[x, i].Value)];
+                                }
+                                listForRemove.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            return listForRemove.ToArray();
+        }
+
+        /// <summary>
         /// Получить индекс из столбца ID выделенной строки активной таблицы
         /// </summary>
         private int GetIndexFromActiveDgv()
@@ -62,10 +112,42 @@ namespace AntiProsrok
             // Если DataGridView найден и в нем выделена какая-то строка
             if (dgv != null && dgv.SelectedRows.Count > 0)
             {
-                return (int) dgv.SelectedRows[0].Cells[0].Value;
+                int index = -1;
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    if (dgv.Columns[i].HeaderText == items.ColIDHeaderText)
+                        index = (int)dgv.SelectedRows[0].Cells[i].Value;
+                }
+                return index;
             }
             else
                 return -1; // Возвращаем -1, если что-то пошло не так.
+        }
+
+        // Добавить столбец с чекбоксом
+        private DataGridViewCheckBoxColumn AddCheckBoxColumn()
+        {
+            DataGridViewCheckBoxColumn dgvCol = new DataGridViewCheckBoxColumn(); ;
+            dgvCol.Name = "checkItem";
+            dgvCol.HeaderText = "Выбрать";
+            dgvCol.DisplayIndex = 0;
+            dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvCol.ReadOnly = false;
+            dgvCol.TrueValue = 1;
+            dgvCol.FalseValue = 0;
+            return dgvCol;
+        }
+
+        // Оформление, применяемое к таблицам после обновления данных
+        private void SetDgvStyle(ref DataGridView dgv)
+        {
+            foreach (DataGridViewColumn col in dgv.Columns)
+                col.ReadOnly = true;
+            dgv.Columns[0].Visible = false;
+            dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgv.Columns.Add(AddCheckBoxColumn());
+            
         }
 
         /// <summary>
@@ -73,28 +155,25 @@ namespace AntiProsrok
         /// </summary>
         private void RefreshTable()
         {
+            dgvAll.Columns.Clear();
+            dgvIsOkay.Columns.Clear();
+            dgvSoon.Columns.Clear();
+            dgvOverdue.Columns.Clear();
             dgvAll.DataSource = items.GetAllItemsAsDataTable();
-            dgvAll.Columns[0].Visible = false;
+            SetDgvStyle(ref dgvAll);
             dgvIsOkay.DataSource = items.GetIsOkayItemsAsDataTable();
-            dgvIsOkay.Columns[0].Visible = false;
+            SetDgvStyle(ref dgvIsOkay);
             dgvSoon.DataSource = items.GetIsSoonItemsAsDataTable();
-            dgvSoon.Columns[0].Visible = false;
+            SetDgvStyle(ref dgvSoon);
             dgvOverdue.DataSource = items.GetIsOverdueItemsAsDataTable();
-            dgvOverdue.Columns[0].Visible = false;
+            SetDgvStyle(ref dgvOverdue);
         }
 
-        // Запуск таймера для отображения уведомления
-        private void PushTimerGo(string message)
+        // Информационное сообщение в трее
+        private string InfoMessageToString()
         {
-            pushTimer.Start();
-            statusSave.Text = message;
-        }
-
-        // Остановка таймера и стирание уведомления
-        private void pushTimer_Tick(object sender, EventArgs e)
-        {
-            statusSave.Text = string.Empty;
-            pushTimer.Stop();
+            return $"У вас {dgvOverdue.Rows.Count} просроченных предметов. " +
+                $"В течение недели выйдет срок годности у {dgvSoon.Rows.Count} предметов.";
         }
         #endregion
 
@@ -184,16 +263,16 @@ namespace AntiProsrok
         private void mmManageAdd_Click(object sender, EventArgs e)
         {
             ItemForm add = new ItemForm(ItemForm.ItemFormMode.Adding);
-            add.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
-            add.cbItemCategory.SelectedIndex = 0;
+            //add.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
+            //add.cbItemCategory.SelectedIndex = 0;
             if (add.ShowDialog() == DialogResult.OK)
             {
                 Item item = new Item();
-                item.Title = add.tbItemName.Text;
-                item.Category = add.cbItemCategory.Text;
-                item.Comment = add.tbItemComment.Text;
-                item.DateOfCreate = add.dtpDateCreate.Value.ToShortDateString();
-                item.DateToTrash = add.dtpDateToTrash.Value.ToShortDateString();
+                item.Title = add.ItemName;
+                item.Category = add.ItemCategory;
+                item.Comment = add.ItemComment;
+                item.DateOfCreate = add.ItemDateOfCreate;
+                item.DateToTrash = add.ItemDateToTrash;
                 items.Add(item);
                 RefreshTable();
             }
@@ -207,21 +286,29 @@ namespace AntiProsrok
             if (activeIndex >= 0)
             {
                 ItemForm edit = new ItemForm(ItemForm.ItemFormMode.Editing);
-                edit.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
-                edit.tbItemName.Text = (string)dgv.SelectedRows[0].Cells[1].Value;
-                edit.cbItemCategory.SelectedItem = (string)dgv.SelectedRows[0].Cells[2].Value;
-                edit.tbItemComment.Text = (string)dgv.SelectedRows[0].Cells[3].Value;
-                edit.dtpDateCreate.Text = (string)dgv.SelectedRows[0].Cells[4].Value;
-                edit.dtpDateToTrash.Text = (string)dgv.SelectedRows[0].Cells[5].Value;
+                
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    if (dgv.Columns[i].HeaderText == items.ColNameHeaderText)
+                        edit.ItemName = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                    if (dgv.Columns[i].HeaderText == items.ColCategoryHeaderText)
+                        edit.ItemCategory = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                    if (dgv.Columns[i].HeaderText == items.ColCommentHeaderText)
+                        edit.ItemComment = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                    if (dgv.Columns[i].HeaderText == items.ColDateOfCreateHeaderText)
+                        edit.ItemDateOfCreate = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                    if (dgv.Columns[i].HeaderText == items.ColDateToTrashHeaderText)
+                        edit.ItemDateToTrash = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                }
 
                 if (edit.ShowDialog() == DialogResult.OK)
                 {
                     Item item = new Item();
-                    item.Title = edit.tbItemName.Text;
-                    item.Category = edit.cbItemCategory.Text;
-                    item.Comment = edit.tbItemComment.Text;
-                    item.DateOfCreate = edit.dtpDateCreate.Value.ToShortDateString();
-                    item.DateToTrash = edit.dtpDateToTrash.Value.ToShortDateString();
+                    item.Title = edit.ItemName;
+                    item.Category = edit.ItemCategory;
+                    item.Comment = edit.ItemComment;
+                    item.DateOfCreate = edit.ItemDateOfCreate;
+                    item.DateToTrash = edit.ItemDateToTrash;
                     items.ChangeBookAt(activeIndex, item);
                     RefreshTable();
                 }
@@ -231,15 +318,24 @@ namespace AntiProsrok
         // Управление - Выбросить в корзину
         private void mmManageToTrash_Click(object sender, EventArgs e)
         {
-            int activeIndex = GetIndexFromActiveDgv(); // Получаем индекс столбца ID выделенной строки активной таблицы
-            if (activeIndex >= 0)
+            //Получить массив Items, отмеченных галочкой в активной таблице
+            Item[] itemsForRemove = GetCheckItemsFromActiveDgv();
+
+            if (itemsForRemove.Length > 0)
             {
-                if (AreYouReady("Данное действие необратимо. Вы уверены?", "Удаление предмета"))
+                if (AreYouReady($"Вы уверены, что хотите удалить {itemsForRemove.Length} предмет(ов)?", "Удаление"))
                 {
-                    items.RemoveAt(activeIndex);
+                    foreach (Item item in itemsForRemove)
+                        items.Remove(item);
                     RefreshTable();
                 }
             }
+            else
+            {
+                MessageBox.Show("Отметьте предметы, которые хотите удалить, галочкой.", "Удаление",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+             
         }
 
         // Управление - Экспорт в *.CSV
@@ -277,7 +373,8 @@ namespace AntiProsrok
         // Применить фильтр
         private void butFilterApply_Click(object sender, EventArgs e)
         {
-            if ((checkDateCreate.Checked || checkDateToTrash.Checked) && (dtpDateCreateOT.Value > dtpDateCreateDO.Value || dtpDateToTrashOT.Value > dtpDateToTrashDO.Value))
+            if ((checkDateCreate.Checked && dtpDateCreateOT.Value > dtpDateCreateDO.Value) || 
+                (checkDateToTrash.Checked && dtpDateToTrashOT.Value > dtpDateToTrashDO.Value))
             {
                 MessageBox.Show("Диапазон дат указан неверно!", "Ошибка", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -333,9 +430,39 @@ namespace AntiProsrok
         }
         #endregion
 
+        #region Статусбар
         private void timerTime_Tick(object sender, EventArgs e)
         {
             tslDateTime.Text = DateTime.Now.ToString();
+        }
+
+        // Запуск таймера для отображения уведомления
+        private void PushTimerGo(string message)
+        {
+            pushTimer.Start();
+            statusSave.Text = message;
+        }
+
+        // Остановка таймера и стирание уведомления
+        private void pushTimer_Tick(object sender, EventArgs e)
+        {
+            statusSave.Text = string.Empty;
+            pushTimer.Stop();
+        }
+        #endregion
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.lastFile = fileName;
+            Properties.Settings.Default.Save();
+        }
+
+        private void notifyIconTrey_DoubleClick(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                WindowState = FormWindowState.Normal;
+            }
         }
     }
 }

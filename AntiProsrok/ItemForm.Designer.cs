@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gbMain = new System.Windows.Forms.GroupBox();
             this.butCancel = new System.Windows.Forms.Button();
             this.butOk = new System.Windows.Forms.Button();
             this.dtpDateToTrash = new System.Windows.Forms.DateTimePicker();
-            this.lbDateToTrash = new System.Windows.Forms.Label();
             this.dtpDateCreate = new System.Windows.Forms.DateTimePicker();
             this.lbDateCreate = new System.Windows.Forms.Label();
             this.cbItemCategory = new System.Windows.Forms.ComboBox();
@@ -41,15 +41,17 @@
             this.lbCategory = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
             this.tbItemName = new System.Windows.Forms.TextBox();
+            this.checkDateToTrash = new System.Windows.Forms.CheckBox();
+            this.toolTipToTrash = new System.Windows.Forms.ToolTip(this.components);
             this.gbMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbMain
             // 
+            this.gbMain.Controls.Add(this.checkDateToTrash);
             this.gbMain.Controls.Add(this.butCancel);
             this.gbMain.Controls.Add(this.butOk);
             this.gbMain.Controls.Add(this.dtpDateToTrash);
-            this.gbMain.Controls.Add(this.lbDateToTrash);
             this.gbMain.Controls.Add(this.dtpDateCreate);
             this.gbMain.Controls.Add(this.lbDateCreate);
             this.gbMain.Controls.Add(this.cbItemCategory);
@@ -61,7 +63,7 @@
             this.gbMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbMain.Location = new System.Drawing.Point(10, 5);
             this.gbMain.Name = "gbMain";
-            this.gbMain.Size = new System.Drawing.Size(247, 294);
+            this.gbMain.Size = new System.Drawing.Size(247, 303);
             this.gbMain.TabIndex = 0;
             this.gbMain.TabStop = false;
             this.gbMain.Text = "Укажите характеристики";
@@ -69,7 +71,7 @@
             // butCancel
             // 
             this.butCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.butCancel.Location = new System.Drawing.Point(6, 261);
+            this.butCancel.Location = new System.Drawing.Point(6, 271);
             this.butCancel.Name = "butCancel";
             this.butCancel.Size = new System.Drawing.Size(235, 23);
             this.butCancel.TabIndex = 6;
@@ -78,7 +80,7 @@
             // 
             // butOk
             // 
-            this.butOk.Location = new System.Drawing.Point(6, 232);
+            this.butOk.Location = new System.Drawing.Point(6, 242);
             this.butOk.Name = "butOk";
             this.butOk.Size = new System.Drawing.Size(235, 23);
             this.butOk.TabIndex = 5;
@@ -88,23 +90,18 @@
             // 
             // dtpDateToTrash
             // 
-            this.dtpDateToTrash.Location = new System.Drawing.Point(6, 205);
+            this.dtpDateToTrash.Location = new System.Drawing.Point(6, 215);
+            this.dtpDateToTrash.MaxDate = new System.DateTime(3020, 3, 21, 0, 0, 0, 0);
+            this.dtpDateToTrash.MinDate = new System.DateTime(1995, 6, 22, 0, 0, 0, 0);
             this.dtpDateToTrash.Name = "dtpDateToTrash";
             this.dtpDateToTrash.Size = new System.Drawing.Size(235, 21);
             this.dtpDateToTrash.TabIndex = 4;
             // 
-            // lbDateToTrash
-            // 
-            this.lbDateToTrash.AutoSize = true;
-            this.lbDateToTrash.Location = new System.Drawing.Point(6, 187);
-            this.lbDateToTrash.Name = "lbDateToTrash";
-            this.lbDateToTrash.Size = new System.Drawing.Size(66, 15);
-            this.lbDateToTrash.TabIndex = 8;
-            this.lbDateToTrash.Text = "Годен ДО:";
-            // 
             // dtpDateCreate
             // 
             this.dtpDateCreate.Location = new System.Drawing.Point(6, 163);
+            this.dtpDateCreate.MaxDate = new System.DateTime(3020, 3, 21, 0, 0, 0, 0);
+            this.dtpDateCreate.MinDate = new System.DateTime(1995, 6, 22, 0, 0, 0, 0);
             this.dtpDateCreate.Name = "dtpDateCreate";
             this.dtpDateCreate.Size = new System.Drawing.Size(235, 21);
             this.dtpDateCreate.TabIndex = 3;
@@ -174,11 +171,25 @@
             this.tbItemName.Size = new System.Drawing.Size(235, 21);
             this.tbItemName.TabIndex = 0;
             // 
+            // checkDateToTrash
+            // 
+            this.checkDateToTrash.AutoSize = true;
+            this.checkDateToTrash.Checked = true;
+            this.checkDateToTrash.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkDateToTrash.Location = new System.Drawing.Point(9, 190);
+            this.checkDateToTrash.Name = "checkDateToTrash";
+            this.checkDateToTrash.Size = new System.Drawing.Size(85, 19);
+            this.checkDateToTrash.TabIndex = 9;
+            this.checkDateToTrash.Text = "Годен ДО:";
+            this.toolTipToTrash.SetToolTip(this.checkDateToTrash, "Снимите галочку, если предмет не имеет срока годности.");
+            this.checkDateToTrash.UseVisualStyleBackColor = true;
+            this.checkDateToTrash.CheckStateChanged += new System.EventHandler(this.checkDateToTrash_CheckStateChanged);
+            // 
             // ItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 309);
+            this.ClientSize = new System.Drawing.Size(267, 318);
             this.Controls.Add(this.gbMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -204,12 +215,13 @@
         private System.Windows.Forms.Label lbCategory;
         private System.Windows.Forms.Button butCancel;
         private System.Windows.Forms.Button butOk;
-        private System.Windows.Forms.Label lbDateToTrash;
         private System.Windows.Forms.Label lbDateCreate;
-        public System.Windows.Forms.TextBox tbItemName;
-        public System.Windows.Forms.TextBox tbItemComment;
-        public System.Windows.Forms.DateTimePicker dtpDateToTrash;
-        public System.Windows.Forms.DateTimePicker dtpDateCreate;
-        public System.Windows.Forms.ComboBox cbItemCategory;
+        private System.Windows.Forms.CheckBox checkDateToTrash;
+        private System.Windows.Forms.TextBox tbItemName;
+        private System.Windows.Forms.TextBox tbItemComment;
+        private System.Windows.Forms.DateTimePicker dtpDateToTrash;
+        private System.Windows.Forms.DateTimePicker dtpDateCreate;
+        private System.Windows.Forms.ComboBox cbItemCategory;
+        private System.Windows.Forms.ToolTip toolTipToTrash;
     }
 }
