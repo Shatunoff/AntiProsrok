@@ -22,9 +22,19 @@ namespace AntiProsrok
             items = new Items();
             fileName = Properties.Settings.Default.lastFile;
             if (File.Exists(fileName))
+            {
                 items.Load(fileName);
-            else fileName = null;
+            }
+            else 
+                fileName = null;
             RefreshTable();
+            if (fileName != null)
+            {
+                notifyIconTrey.BalloonTipIcon = ToolTipIcon.Info;
+                notifyIconTrey.BalloonTipTitle = "Отчет со склада";
+                notifyIconTrey.BalloonTipText = InfoMessageToString();
+                notifyIconTrey.ShowBalloonTip(300);
+            }
             tslDateTime.Text = DateTime.Now.ToString();
             timerTime.Start();
             cbFilterCategory.Items.Clear();
@@ -46,6 +56,9 @@ namespace AntiProsrok
             return false;
         }
 
+        /// <summary>
+        /// Получить активную таблицу
+        /// </summary>
         private DataGridView GetActiveDgv()
         {
             DataGridView dgv = null;
@@ -57,6 +70,9 @@ namespace AntiProsrok
             return dgv;
         }
 
+        /// <summary>
+        /// Получить список отмеченных галочкой предметов
+        /// </summary>
         private Item[] GetCheckItemsFromActiveDgv()
         {
             List<Item> listForRemove = new List<Item>();
@@ -147,6 +163,12 @@ namespace AntiProsrok
             SetDgvStyle(ref dgvOverdue);
         }
 
+        // Информационное сообщение в трее
+        private string InfoMessageToString()
+        {
+            return $"У вас {dgvOverdue.Rows.Count} просроченных предметов. " +
+                $"В течение недели выйдет срок годности у {dgvSoon.Rows.Count} предметов.";
+        }
         #endregion
 
         #region Главное меню (MenuStrip)
@@ -423,6 +445,20 @@ namespace AntiProsrok
         {
             Properties.Settings.Default.lastFile = fileName;
             Properties.Settings.Default.Save();
+        }
+
+        private void notifyIconTrey_DoubleClick(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                WindowState = FormWindowState.Normal;
+                ShowInTaskbar = true;
+            }
+        }
+
+        private void notifyIconTrey_BalloonTipClosed(object sender, EventArgs e)
+        {
+            notifyIconTrey.Visible = false;
         }
     }
 }
