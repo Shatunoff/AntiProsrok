@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AntiProsrok
@@ -19,6 +20,10 @@ namespace AntiProsrok
         {
             InitializeComponent();
             items = new Items();
+            fileName = Properties.Settings.Default.lastFile;
+            if (File.Exists(fileName))
+                items.Load(fileName);
+            else fileName = null;
             RefreshTable();
             tslDateTime.Text = DateTime.Now.ToString();
             timerTime.Start();
@@ -413,5 +418,11 @@ namespace AntiProsrok
             pushTimer.Stop();
         }
         #endregion
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.lastFile = fileName;
+            Properties.Settings.Default.Save();
+        }
     }
 }
