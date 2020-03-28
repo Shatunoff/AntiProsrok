@@ -21,6 +21,12 @@ namespace AntiProsrok
     public class Items
     {
         List<Item> list;
+        public string ColIDHeaderText { get; set; }
+        public string ColNameHeaderText { get; set; }
+        public string ColCategoryHeaderText { get; set; }
+        public string ColCommentHeaderText { get; set; }
+        public string ColDateOfCreateHeaderText { get; set; }
+        public string ColDateToTrashHeaderText { get; set; }
 
         /// <summary>
         /// Конструктор, создающий пустой список.
@@ -28,6 +34,12 @@ namespace AntiProsrok
         public Items()
         {
             list = new List<Item>();
+            ColIDHeaderText = "ID";
+            ColNameHeaderText = "Название предмета";
+            ColCategoryHeaderText = "Категория";
+            ColCommentHeaderText = "Примечание";
+            ColDateOfCreateHeaderText = "Дата изготовления";
+            ColDateToTrashHeaderText = "Годен ДО";
         }
 
         /// <summary>
@@ -50,12 +62,12 @@ namespace AntiProsrok
         private DataTable dtCreate()
         {
             DataTable dt = new DataTable();
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Название предмета", typeof(string));
-            dt.Columns.Add("Категория", typeof(string));
-            dt.Columns.Add("Примечание", typeof(string));
-            dt.Columns.Add("Дата изготовления", typeof(DateTime));
-            dt.Columns.Add("Годен ДО", typeof(DateTime));
+            dt.Columns.Add(ColIDHeaderText, typeof(int));
+            dt.Columns.Add(ColNameHeaderText, typeof(string));
+            dt.Columns.Add(ColCategoryHeaderText, typeof(string));
+            dt.Columns.Add(ColCommentHeaderText, typeof(string));
+            dt.Columns.Add(ColDateOfCreateHeaderText, typeof(DateTime));
+            dt.Columns.Add(ColDateToTrashHeaderText, typeof(DateTime));
             return dt;
         }
 
@@ -372,6 +384,19 @@ namespace AntiProsrok
             {
                 MessageBox.Show("Индекс указанной книги находится за пределами диапазона.", "IndexOutRangeException",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Неизвестная ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void Remove(Item item)
+        {
+            try
+            {
+                list.Remove(item);
             }
             catch (Exception e)
             {

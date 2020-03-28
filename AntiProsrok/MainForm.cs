@@ -52,6 +52,35 @@ namespace AntiProsrok
             return dgv;
         }
 
+        private Item[] GetCheckItemsFromActiveDgv()
+        {
+            List<Item> listForRemove = new List<Item>();
+            DataGridView dgv = GetActiveDgv();
+            if (dgv != null)
+            {
+                for (int i = 0; i < dgv.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dgv.Columns.Count; j++)
+                    {
+                        if (dgv.Columns[j] is DataGridViewCheckBoxColumn)
+                        {
+                            if ((bool)dgv[j, i].EditedFormattedValue)
+                            {
+                                Item item = new Item();
+                                for (int x = 0; x < dgv.Columns.Count; x++)
+                                {
+                                    if (dgv.Columns[x].HeaderText == items.ColIDHeaderText)
+                                        item = items[Convert.ToInt32(dgv[x, i].Value)];
+                                }
+                                listForRemove.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            return listForRemove.ToArray();
+        }
+
         /// <summary>
         /// Получить индекс из столбца ID выделенной строки активной таблицы
         /// </summary>
@@ -68,34 +97,51 @@ namespace AntiProsrok
                 return -1; // Возвращаем -1, если что-то пошло не так.
         }
 
+        // Добавить столбец с чекбоксом
+        private DataGridViewCheckBoxColumn AddCheckBoxColumn()
+        {
+            DataGridViewCheckBoxColumn dgvCol = new DataGridViewCheckBoxColumn(); ;
+            dgvCol.Name = "checkItem";
+            dgvCol.HeaderText = "Выбрать";
+            dgvCol.DisplayIndex = 0;
+            dgvCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dgvCol.ReadOnly = false;
+            dgvCol.TrueValue = 1;
+            dgvCol.FalseValue = 0;
+            return dgvCol;
+        }
+
+        // Оформление, применяемое к таблицам после обновления данных
+        private void SetDgvStyle(ref DataGridView dgv)
+        {
+            foreach (DataGridViewColumn col in dgv.Columns)
+                col.ReadOnly = true;
+            dgv.Columns[0].Visible = false;
+            dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgv.Columns.Add(AddCheckBoxColumn());
+            
+        }
+
         /// <summary>
         /// Обновить источник таблицы
         /// </summary>
         private void RefreshTable()
         {
+            dgvAll.Columns.Clear();
+            dgvIsOkay.Columns.Clear();
+            dgvSoon.Columns.Clear();
+            dgvOverdue.Columns.Clear();
             dgvAll.DataSource = items.GetAllItemsAsDataTable();
-            dgvAll.Columns[0].Visible = false;
+            SetDgvStyle(ref dgvAll);
             dgvIsOkay.DataSource = items.GetIsOkayItemsAsDataTable();
-            dgvIsOkay.Columns[0].Visible = false;
+            SetDgvStyle(ref dgvIsOkay);
             dgvSoon.DataSource = items.GetIsSoonItemsAsDataTable();
-            dgvSoon.Columns[0].Visible = false;
+            SetDgvStyle(ref dgvSoon);
             dgvOverdue.DataSource = items.GetIsOverdueItemsAsDataTable();
-            dgvOverdue.Columns[0].Visible = false;
+            SetDgvStyle(ref dgvOverdue);
         }
 
-        // Запуск таймера для отображения уведомления
-        private void PushTimerGo(string message)
-        {
-            pushTimer.Start();
-            statusSave.Text = message;
-        }
-
-        // Остановка таймера и стирание уведомления
-        private void pushTimer_Tick(object sender, EventArgs e)
-        {
-            statusSave.Text = string.Empty;
-            pushTimer.Stop();
-        }
         #endregion
 
         #region Главное меню (MenuStrip)
@@ -231,15 +277,28 @@ namespace AntiProsrok
         // Управление - Выбросить в корзину
         private void mmManageToTrash_Click(object sender, EventArgs e)
         {
-            int activeIndex = GetIndexFromActiveDgv(); // Получаем индекс столбца ID выделенной строки активной таблицы
-            if (activeIndex >= 0)
+            //Получить массив Items, отмеченных галочкой в активной таблице
+            Item[] itemsForRemove = GetCheckItemsFromActiveDgv();
+            //foreach (Item i in itemsForRemove)
+            //{
+            //    Console.WriteLine($"{i.Title}-{i.Category}-{i.Comment}-{i.DateOfCreate}-{i.DateToTrash}");
+            //}
+
+            if (itemsForRemove.Length > 0)
             {
-                if (AreYouReady("Данное действие необратимо. Вы уверены?", "Удаление предмета"))
+                if (AreYouReady($"Вы уверены, что хотите удалить {itemsForRemove.Length} предмет(ов)?", "Удаление"))
                 {
-                    items.RemoveAt(activeIndex);
+                    foreach (Item item in itemsForRemove)
+                        items.Remove(item);
                     RefreshTable();
                 }
             }
+            else
+            {
+                MessageBox.Show("Отметьте предметы, которые хотите удалить, галочкой.", "Удаление",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+             
         }
 
         // Управление - Экспорт в *.CSV
@@ -277,7 +336,8 @@ namespace AntiProsrok
         // Применить фильтр
         private void butFilterApply_Click(object sender, EventArgs e)
         {
-            if (dtpDateCreateOT.Value > dtpDateCreateDO.Value || dtpDateToTrashOT.Value > dtpDateToTrashDO.Value)
+            if ((checkDateCreate.Checked && dtpDateCreateOT.Value > dtpDateCreateDO.Value) || 
+                (checkDateToTrash.Checked && dtpDateToTrashOT.Value > dtpDateToTrashDO.Value))
             {
                 MessageBox.Show("Диапазон дат указан неверно!", "Ошибка", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -333,9 +393,25 @@ namespace AntiProsrok
         }
         #endregion
 
+        #region Статусбар
         private void timerTime_Tick(object sender, EventArgs e)
         {
             tslDateTime.Text = DateTime.Now.ToString();
         }
+
+        // Запуск таймера для отображения уведомления
+        private void PushTimerGo(string message)
+        {
+            pushTimer.Start();
+            statusSave.Text = message;
+        }
+
+        // Остановка таймера и стирание уведомления
+        private void pushTimer_Tick(object sender, EventArgs e)
+        {
+            statusSave.Text = string.Empty;
+            pushTimer.Stop();
+        }
+        #endregion
     }
 }

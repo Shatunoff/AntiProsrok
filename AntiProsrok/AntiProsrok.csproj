@@ -34,6 +34,9 @@
   <PropertyGroup>
     <ApplicationIcon>Historical_icon-icons.com_54175.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
