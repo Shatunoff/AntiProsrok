@@ -230,16 +230,16 @@ namespace AntiProsrok
         private void mmManageAdd_Click(object sender, EventArgs e)
         {
             ItemForm add = new ItemForm(ItemForm.ItemFormMode.Adding);
-            add.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
-            add.cbItemCategory.SelectedIndex = 0;
+            //add.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
+            //add.cbItemCategory.SelectedIndex = 0;
             if (add.ShowDialog() == DialogResult.OK)
             {
                 Item item = new Item();
-                item.Title = add.tbItemName.Text;
-                item.Category = add.cbItemCategory.Text;
-                item.Comment = add.tbItemComment.Text;
-                item.DateOfCreate = add.dtpDateCreate.Value.ToShortDateString();
-                item.DateToTrash = add.dtpDateToTrash.Value.ToShortDateString();
+                item.Title = add.ItemName;
+                item.Category = add.ItemCategory;
+                item.Comment = add.ItemComment;
+                item.DateOfCreate = add.ItemDateOfCreate;
+                item.DateToTrash = add.ItemDateToTrash;
                 items.Add(item);
                 RefreshTable();
             }
@@ -253,21 +253,21 @@ namespace AntiProsrok
             if (activeIndex >= 0)
             {
                 ItemForm edit = new ItemForm(ItemForm.ItemFormMode.Editing);
-                edit.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
-                edit.tbItemName.Text = (string)dgv.SelectedRows[0].Cells[1].Value;
-                edit.cbItemCategory.SelectedItem = (string)dgv.SelectedRows[0].Cells[2].Value;
-                edit.tbItemComment.Text = (string)dgv.SelectedRows[0].Cells[3].Value;
-                edit.dtpDateCreate.Text = (string)dgv.SelectedRows[0].Cells[4].Value;
-                edit.dtpDateToTrash.Text = (string)dgv.SelectedRows[0].Cells[5].Value;
+                //edit.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
+                edit.ItemName = (string)dgv.SelectedRows[0].Cells[1].Value;
+                edit.ItemCategory = (string)dgv.SelectedRows[0].Cells[2].Value;
+                edit.ItemComment = (string)dgv.SelectedRows[0].Cells[3].Value;
+                edit.ItemDateOfCreate = ((DateTime)dgv.SelectedRows[0].Cells[4].Value).ToShortDateString();
+                edit.ItemDateToTrash = ((DateTime)dgv.SelectedRows[0].Cells[5].Value).ToShortDateString();
 
                 if (edit.ShowDialog() == DialogResult.OK)
                 {
                     Item item = new Item();
-                    item.Title = edit.tbItemName.Text;
-                    item.Category = edit.cbItemCategory.Text;
-                    item.Comment = edit.tbItemComment.Text;
-                    item.DateOfCreate = edit.dtpDateCreate.Value.ToShortDateString();
-                    item.DateToTrash = edit.dtpDateToTrash.Value.ToShortDateString();
+                    item.Title = edit.ItemName;
+                    item.Category = edit.ItemCategory;
+                    item.Comment = edit.ItemComment;
+                    item.DateOfCreate = edit.ItemDateOfCreate;
+                    item.DateToTrash = edit.ItemDateToTrash;
                     items.ChangeBookAt(activeIndex, item);
                     RefreshTable();
                 }
