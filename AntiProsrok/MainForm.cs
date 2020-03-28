@@ -112,7 +112,13 @@ namespace AntiProsrok
             // Если DataGridView найден и в нем выделена какая-то строка
             if (dgv != null && dgv.SelectedRows.Count > 0)
             {
-                return (int) dgv.SelectedRows[0].Cells[0].Value;
+                int index = -1;
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    if (dgv.Columns[i].HeaderText == items.ColIDHeaderText)
+                        index = (int)dgv.SelectedRows[0].Cells[i].Value;
+                }
+                return index;
             }
             else
                 return -1; // Возвращаем -1, если что-то пошло не так.
@@ -280,12 +286,20 @@ namespace AntiProsrok
             if (activeIndex >= 0)
             {
                 ItemForm edit = new ItemForm(ItemForm.ItemFormMode.Editing);
-                //edit.cbItemCategory.Items.AddRange(Category.GetCategories().ToArray());
-                edit.ItemName = (string)dgv.SelectedRows[0].Cells[1].Value;
-                edit.ItemCategory = (string)dgv.SelectedRows[0].Cells[2].Value;
-                edit.ItemComment = (string)dgv.SelectedRows[0].Cells[3].Value;
-                edit.ItemDateOfCreate = ((DateTime)dgv.SelectedRows[0].Cells[4].Value).ToShortDateString();
-                edit.ItemDateToTrash = ((DateTime)dgv.SelectedRows[0].Cells[5].Value).ToShortDateString();
+                
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    if (dgv.Columns[i].HeaderText == items.ColNameHeaderText)
+                        edit.ItemName = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                    if (dgv.Columns[i].HeaderText == items.ColCategoryHeaderText)
+                        edit.ItemCategory = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                    if (dgv.Columns[i].HeaderText == items.ColCommentHeaderText)
+                        edit.ItemComment = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                    if (dgv.Columns[i].HeaderText == items.ColDateOfCreateHeaderText)
+                        edit.ItemDateOfCreate = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                    if (dgv.Columns[i].HeaderText == items.ColDateToTrashHeaderText)
+                        edit.ItemDateToTrash = dgv.SelectedRows[0].Cells[i].Value.ToString();
+                }
 
                 if (edit.ShowDialog() == DialogResult.OK)
                 {
@@ -306,10 +320,6 @@ namespace AntiProsrok
         {
             //Получить массив Items, отмеченных галочкой в активной таблице
             Item[] itemsForRemove = GetCheckItemsFromActiveDgv();
-            //foreach (Item i in itemsForRemove)
-            //{
-            //    Console.WriteLine($"{i.Title}-{i.Category}-{i.Comment}-{i.DateOfCreate}-{i.DateToTrash}");
-            //}
 
             if (itemsForRemove.Length > 0)
             {
@@ -452,13 +462,7 @@ namespace AntiProsrok
             if (WindowState == FormWindowState.Minimized)
             {
                 WindowState = FormWindowState.Normal;
-                ShowInTaskbar = true;
             }
-        }
-
-        private void notifyIconTrey_BalloonTipClosed(object sender, EventArgs e)
-        {
-            notifyIconTrey.Visible = false;
         }
     }
 }
