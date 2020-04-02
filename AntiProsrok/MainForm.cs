@@ -40,6 +40,8 @@ namespace AntiProsrok
             cbFilterCategory.Items.Clear();
             cbFilterCategory.Items.Add(string.Empty);
             cbFilterCategory.Items.AddRange(Category.GetCategories().ToArray());
+            dtpDateCreateOT.Text = dtpDateCreateDO.Text = DateTime.Now.ToShortDateString();
+            dtpDateToTrashOT.Text = dtpDateToTrashDO.Text = DateTime.Now.ToShortDateString();
         }
 
         #region Методы для работы с предметами

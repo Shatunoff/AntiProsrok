@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gbMain = new System.Windows.Forms.GroupBox();
+            this.checkDateToTrash = new System.Windows.Forms.CheckBox();
             this.butCancel = new System.Windows.Forms.Button();
             this.butOk = new System.Windows.Forms.Button();
             this.dtpDateToTrash = new System.Windows.Forms.DateTimePicker();
@@ -41,7 +42,6 @@
             this.lbCategory = new System.Windows.Forms.Label();
             this.lbName = new System.Windows.Forms.Label();
             this.tbItemName = new System.Windows.Forms.TextBox();
-            this.checkDateToTrash = new System.Windows.Forms.CheckBox();
             this.toolTipToTrash = new System.Windows.Forms.ToolTip(this.components);
             this.gbMain.SuspendLayout();
             this.SuspendLayout();
@@ -67,6 +67,18 @@
             this.gbMain.TabIndex = 0;
             this.gbMain.TabStop = false;
             this.gbMain.Text = "Укажите характеристики";
+            // 
+            // checkDateToTrash
+            // 
+            this.checkDateToTrash.AutoSize = true;
+            this.checkDateToTrash.Location = new System.Drawing.Point(9, 190);
+            this.checkDateToTrash.Name = "checkDateToTrash";
+            this.checkDateToTrash.Size = new System.Drawing.Size(85, 19);
+            this.checkDateToTrash.TabIndex = 9;
+            this.checkDateToTrash.Text = "Годен ДО:";
+            this.toolTipToTrash.SetToolTip(this.checkDateToTrash, "Снимите галочку, если предмет не имеет срока годности.");
+            this.checkDateToTrash.UseVisualStyleBackColor = true;
+            this.checkDateToTrash.CheckStateChanged += new System.EventHandler(this.checkDateToTrash_CheckStateChanged);
             // 
             // butCancel
             // 
@@ -170,20 +182,6 @@
             this.tbItemName.Name = "tbItemName";
             this.tbItemName.Size = new System.Drawing.Size(235, 21);
             this.tbItemName.TabIndex = 0;
-            // 
-            // checkDateToTrash
-            // 
-            this.checkDateToTrash.AutoSize = true;
-            this.checkDateToTrash.Checked = true;
-            this.checkDateToTrash.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkDateToTrash.Location = new System.Drawing.Point(9, 190);
-            this.checkDateToTrash.Name = "checkDateToTrash";
-            this.checkDateToTrash.Size = new System.Drawing.Size(85, 19);
-            this.checkDateToTrash.TabIndex = 9;
-            this.checkDateToTrash.Text = "Годен ДО:";
-            this.toolTipToTrash.SetToolTip(this.checkDateToTrash, "Снимите галочку, если предмет не имеет срока годности.");
-            this.checkDateToTrash.UseVisualStyleBackColor = true;
-            this.checkDateToTrash.CheckStateChanged += new System.EventHandler(this.checkDateToTrash_CheckStateChanged);
             // 
             // ItemForm
             // 

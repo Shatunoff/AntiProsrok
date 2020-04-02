@@ -100,12 +100,6 @@ namespace AntiProsrok
                 default:
                     break;
             }
-
-            if (itemFormMode == ItemFormMode.Editing)
-            {
-                if (ItemDateToTrash != dtpDateToTrash.MaxDate.ToShortDateString())
-                    checkDateToTrash.Checked = false;
-            }
         }
 
         private void butOk_Click(object sender, EventArgs e)
