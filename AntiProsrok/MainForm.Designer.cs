@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.mmFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mmFileCreateNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +98,10 @@
             this.cmsTrey = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmsShowProgram = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsExitProgram = new System.Windows.Forms.ToolStripMenuItem();
+            this.dgvContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.dgvContextMenuAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьИнформациюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьПредметToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.tsMain.SuspendLayout();
@@ -117,6 +117,7 @@
             this.panelForGb.SuspendLayout();
             this.gbFilter.SuspendLayout();
             this.cmsTrey.SuspendLayout();
+            this.dgvContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -471,14 +472,7 @@
             this.dgvAll.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAll.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvAll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvAll.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvAll.ContextMenuStrip = this.dgvContextMenu;
             this.dgvAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAll.Location = new System.Drawing.Point(3, 3);
             this.dgvAll.MultiSelect = false;
@@ -491,6 +485,7 @@
             this.dgvAll.ShowRowErrors = false;
             this.dgvAll.Size = new System.Drawing.Size(591, 309);
             this.dgvAll.TabIndex = 0;
+            this.dgvAll.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvAll_MouseDown);
             // 
             // tpIsOkay
             // 
@@ -512,14 +507,7 @@
             this.dgvIsOkay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvIsOkay.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvIsOkay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvIsOkay.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvIsOkay.ContextMenuStrip = this.dgvContextMenu;
             this.dgvIsOkay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvIsOkay.Location = new System.Drawing.Point(3, 3);
             this.dgvIsOkay.MultiSelect = false;
@@ -532,6 +520,7 @@
             this.dgvIsOkay.ShowRowErrors = false;
             this.dgvIsOkay.Size = new System.Drawing.Size(591, 309);
             this.dgvIsOkay.TabIndex = 0;
+            this.dgvIsOkay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvAll_MouseDown);
             // 
             // tpSoon
             // 
@@ -553,14 +542,7 @@
             this.dgvSoon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSoon.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvSoon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvSoon.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvSoon.ContextMenuStrip = this.dgvContextMenu;
             this.dgvSoon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSoon.Location = new System.Drawing.Point(3, 3);
             this.dgvSoon.MultiSelect = false;
@@ -573,6 +555,7 @@
             this.dgvSoon.ShowRowErrors = false;
             this.dgvSoon.Size = new System.Drawing.Size(591, 309);
             this.dgvSoon.TabIndex = 0;
+            this.dgvSoon.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvAll_MouseDown);
             // 
             // tpOverdue
             // 
@@ -595,14 +578,7 @@
             this.dgvOverdue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOverdue.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvOverdue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOverdue.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvOverdue.ContextMenuStrip = this.dgvContextMenu;
             this.dgvOverdue.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvOverdue.Location = new System.Drawing.Point(3, 3);
             this.dgvOverdue.MultiSelect = false;
@@ -615,6 +591,7 @@
             this.dgvOverdue.ShowRowErrors = false;
             this.dgvOverdue.Size = new System.Drawing.Size(591, 309);
             this.dgvOverdue.TabIndex = 0;
+            this.dgvOverdue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvAll_MouseDown);
             // 
             // panelForGb
             // 
@@ -859,6 +836,36 @@
             this.cmsExitProgram.Text = "Выйти из программы";
             this.cmsExitProgram.Click += new System.EventHandler(this.mmFileExit_Click);
             // 
+            // dgvContextMenu
+            // 
+            this.dgvContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dgvContextMenuAdd,
+            this.изменитьИнформациюToolStripMenuItem,
+            this.удалитьПредметToolStripMenuItem});
+            this.dgvContextMenu.Name = "dgvContextMenu";
+            this.dgvContextMenu.Size = new System.Drawing.Size(215, 70);
+            // 
+            // dgvContextMenuAdd
+            // 
+            this.dgvContextMenuAdd.Name = "dgvContextMenuAdd";
+            this.dgvContextMenuAdd.Size = new System.Drawing.Size(214, 22);
+            this.dgvContextMenuAdd.Text = "Добавить новый предмет";
+            this.dgvContextMenuAdd.Click += new System.EventHandler(this.mmManageAdd_Click);
+            // 
+            // изменитьИнформациюToolStripMenuItem
+            // 
+            this.изменитьИнформациюToolStripMenuItem.Name = "изменитьИнформациюToolStripMenuItem";
+            this.изменитьИнформациюToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.изменитьИнформациюToolStripMenuItem.Text = "Изменить информацию";
+            this.изменитьИнформациюToolStripMenuItem.Click += new System.EventHandler(this.mmManageEdit_Click);
+            // 
+            // удалитьПредметToolStripMenuItem
+            // 
+            this.удалитьПредметToolStripMenuItem.Name = "удалитьПредметToolStripMenuItem";
+            this.удалитьПредметToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.удалитьПредметToolStripMenuItem.Text = "Удалить предмет";
+            this.удалитьПредметToolStripMenuItem.Click += new System.EventHandler(this.mmManageToTrash_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -895,6 +902,7 @@
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
             this.cmsTrey.ResumeLayout(false);
+            this.dgvContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -970,6 +978,10 @@
         private System.Windows.Forms.ContextMenuStrip cmsTrey;
         private System.Windows.Forms.ToolStripMenuItem cmsShowProgram;
         private System.Windows.Forms.ToolStripMenuItem cmsExitProgram;
+        private System.Windows.Forms.ContextMenuStrip dgvContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem dgvContextMenuAdd;
+        private System.Windows.Forms.ToolStripMenuItem изменитьИнформациюToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьПредметToolStripMenuItem;
     }
 }
 

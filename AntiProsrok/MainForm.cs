@@ -320,6 +320,7 @@ namespace AntiProsrok
         // Управление - Выбросить в корзину
         private void mmManageToTrash_Click(object sender, EventArgs e)
         {
+            DataGridView dgv = GetActiveDgv();
             //Получить массив Items, отмеченных галочкой в активной таблице
             Item[] itemsForRemove = GetCheckItemsFromActiveDgv();
 
@@ -331,6 +332,12 @@ namespace AntiProsrok
                         items.Remove(item);
                     RefreshTable();
                 }
+            }
+            else if (itemsForRemove.Length == 0 && dgv.SelectedRows.Count > 0)
+            {
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                    if (dgv.Columns[i] is DataGridViewCheckBoxColumn) dgv[i, dgv.SelectedRows[0].Index].Value = 1;
+                mmManageToTrash.PerformClick();
             }
             else
             {
@@ -464,6 +471,19 @@ namespace AntiProsrok
             if (WindowState == FormWindowState.Minimized)
             {
                 WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void dgvAll_MouseDown(object sender, MouseEventArgs e)
+        {
+            DataGridView dgv = GetActiveDgv();
+            if (e.Button == MouseButtons.Right)
+            {
+                var h = dgv.HitTest(e.X, e.Y);
+                if (h.Type == DataGridViewHitTestType.Cell)
+                {
+                    dgv.Rows[h.RowIndex].Selected = true;
+                }
             }
         }
     }
