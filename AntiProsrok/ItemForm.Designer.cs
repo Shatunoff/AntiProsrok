@@ -71,6 +71,8 @@
             // checkDateToTrash
             // 
             this.checkDateToTrash.AutoSize = true;
+            this.checkDateToTrash.Checked = true;
+            this.checkDateToTrash.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkDateToTrash.Location = new System.Drawing.Point(9, 190);
             this.checkDateToTrash.Name = "checkDateToTrash";
             this.checkDateToTrash.Size = new System.Drawing.Size(85, 19);

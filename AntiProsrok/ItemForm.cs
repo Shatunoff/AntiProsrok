@@ -100,6 +100,8 @@ namespace AntiProsrok
                 default:
                     break;
             }
+
+            checkDateToTrash.Checked = false;
         }
 
         private void butOk_Click(object sender, EventArgs e)
